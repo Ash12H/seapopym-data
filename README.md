@@ -20,3 +20,13 @@ List of data to include :
 
 -   Temporal resolution: daily
 -   Spatial resolution: 1 degree
+
+## How to vizualize the process
+
+Open the notebook in the `data/<location>/scripts` folder and run the cells.
+
+You can also use the voila command to run the notebook as a standalone web application.
+
+```bash
+voila <notebook>.ipynb
+```
