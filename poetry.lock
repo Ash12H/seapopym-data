@@ -263,6 +263,23 @@ files = [
 ]
 
 [[package]]
+name = "cf-xarray"
+version = "0.9.0"
+description = "A convenience wrapper for using CF attributes on xarray objects"
+optional = false
+python-versions = ">=3.9"
+files = [
+    {file = "cf_xarray-0.9.0-py3-none-any.whl", hash = "sha256:338ae3e55138b6374f64a70844a1f0dac63811781c456b4c30878874b8b4c2c0"},
+    {file = "cf_xarray-0.9.0.tar.gz", hash = "sha256:01213bdc5ed4d41eeb5da179d99076f49a905b1995daef2a0c7ec402b148675c"},
+]
+
+[package.dependencies]
+xarray = "*"
+
+[package.extras]
+all = ["matplotlib", "pint", "pooch", "regex", "rich", "shapely"]
+
+[[package]]
 name = "cffi"
 version = "1.16.0"
 description = "Foreign Function Interface for Python calling C code."
@@ -2467,6 +2484,48 @@ typing = ["typing-extensions"]
 xmp = ["defusedxml"]
 
 [[package]]
+name = "pint"
+version = "0.23"
+description = "Physical quantities module"
+optional = false
+python-versions = ">=3.9"
+files = [
+    {file = "Pint-0.23-py3-none-any.whl", hash = "sha256:df79b6b5f1beb7ed0cd55d91a0766fc55f972f757a9364e844958c05e8eb66f9"},
+    {file = "Pint-0.23.tar.gz", hash = "sha256:e1509b91606dbc52527c600a4ef74ffac12fff70688aff20e9072409346ec9b4"},
+]
+
+[package.dependencies]
+typing-extensions = "*"
+
+[package.extras]
+babel = ["babel (<=2.8)"]
+bench = ["pytest", "pytest-codspeed"]
+dask = ["dask"]
+mip = ["mip (>=1.13)"]
+numpy = ["numpy (>=1.19.5)"]
+pandas = ["pint-pandas (>=0.3)"]
+test = ["pytest", "pytest-benchmark", "pytest-cov", "pytest-mpl", "pytest-subtests"]
+testbase = ["pytest", "pytest-benchmark", "pytest-cov", "pytest-subtests"]
+uncertainties = ["uncertainties (>=3.1.6)"]
+xarray = ["xarray"]
+
+[[package]]
+name = "pint-xarray"
+version = "0.3"
+description = "Physical units interface to xarray using Pint"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "pint-xarray-0.3.tar.gz", hash = "sha256:3545dfa78bee3f98eba29b8bd17500e3b5cb7c7b03a2c2781c4d4d59b6a82841"},
+    {file = "pint_xarray-0.3-py3-none-any.whl", hash = "sha256:a7d87c792a2e981cbff464bd1c875e872ef7a0c882a9395cfbc34512b3dcb1ab"},
+]
+
+[package.dependencies]
+numpy = ">=1.17"
+pint = ">=0.16"
+xarray = ">=0.16.1"
+
+[[package]]
 name = "platformdirs"
 version = "4.2.1"
 description = "A small Python package for determining appropriate platform-specific dirs, e.g. a `user data dir`."
@@ -3638,4 +3697,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "f83f12a21dd8b8c793154cae8f1d6764c2bd31f740d78d11efe8f269baf87fa1"
+content-hash = "e162e6e4d7daa0cdaf2dcf9866de693dfd9b23943a42e703cbccb1c028138f60"
