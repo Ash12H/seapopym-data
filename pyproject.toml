@@ -23,6 +23,7 @@ netcdf4 = "^1.6.5"
 pint-xarray = "^0.3"
 cf-xarray = "^0.9.0"
 scipy = "^1.13.0"
+ruff = "^0.4.6"
 
 
 [build-system]

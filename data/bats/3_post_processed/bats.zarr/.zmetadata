@@ -1,0 +1,472 @@
+{
+    "metadata": {
+        ".zattrs": {},
+        ".zgroup": {
+            "zarr_format": 2
+        },
+        "depth/.zarray": {
+            "chunks": [
+                7
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<f8",
+            "fill_value": "NaN",
+            "filters": null,
+            "order": "C",
+            "shape": [
+                7
+            ],
+            "zarr_format": 2
+        },
+        "depth/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "depth"
+            ],
+            "axis": "Z",
+            "long_name": "Depth",
+            "standard_name": "depth",
+            "units": "meters"
+        },
+        "dissolved_oxygen/.zarray": {
+            "chunks": [
+                5479,
+                1,
+                1,
+                7
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<f8",
+            "fill_value": "NaN",
+            "filters": null,
+            "order": "C",
+            "shape": [
+                10958,
+                1,
+                1,
+                7
+            ],
+            "zarr_format": 2
+        },
+        "dissolved_oxygen/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "time",
+                "latitude",
+                "longitude",
+                "depth"
+            ],
+            "coordinates": "during_day",
+            "long_name": "Dissolved Oxygen",
+            "standard_name": "mole_concentration_of_dissolved_molecular_oxygen_in_sea_water",
+            "units": "micromoles/kg"
+        },
+        "during_day/.zarray": {
+            "chunks": [],
+            "compressor": null,
+            "dtype": "|i1",
+            "fill_value": null,
+            "filters": null,
+            "order": "C",
+            "shape": [],
+            "zarr_format": 2
+        },
+        "during_day/.zattrs": {
+            "_ARRAY_DIMENSIONS": [],
+            "dtype": "bool"
+        },
+        "latitude/.zarray": {
+            "chunks": [
+                1
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<f8",
+            "fill_value": "NaN",
+            "filters": null,
+            "order": "C",
+            "shape": [
+                1
+            ],
+            "zarr_format": 2
+        },
+        "latitude/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "latitude"
+            ],
+            "axis": "Y",
+            "long_name": "Latitude",
+            "standard_name": "latitude",
+            "units": "degrees_north"
+        },
+        "longitude/.zarray": {
+            "chunks": [
+                1
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<f8",
+            "fill_value": "NaN",
+            "filters": null,
+            "order": "C",
+            "shape": [
+                1
+            ],
+            "zarr_format": 2
+        },
+        "longitude/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "longitude"
+            ],
+            "axis": "X",
+            "long_name": "Longitude",
+            "standard_name": "longitude",
+            "units": "degrees_east"
+        },
+        "nanoeukaryotes/.zarray": {
+            "chunks": [
+                5479,
+                1,
+                1,
+                7
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<f8",
+            "fill_value": "NaN",
+            "filters": null,
+            "order": "C",
+            "shape": [
+                10958,
+                1,
+                1,
+                7
+            ],
+            "zarr_format": 2
+        },
+        "nanoeukaryotes/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "time",
+                "latitude",
+                "longitude",
+                "depth"
+            ],
+            "coordinates": "during_day",
+            "long_name": "Nanoeukaryotes",
+            "units": "cells/ml"
+        },
+        "primary_production_mean_light_values_minus_dark_value/.zarray": {
+            "chunks": [
+                1,
+                1,
+                5479,
+                7
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<f8",
+            "fill_value": "NaN",
+            "filters": null,
+            "order": "C",
+            "shape": [
+                1,
+                1,
+                10958,
+                7
+            ],
+            "zarr_format": 2
+        },
+        "primary_production_mean_light_values_minus_dark_value/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "latitude",
+                "longitude",
+                "time",
+                "depth"
+            ],
+            "coordinates": "during_day",
+            "desc": "carbon weight",
+            "long_name": "Primary Production Mean Light values - Dark value",
+            "standard_name": "mass_concentration_of_carbon_in_sea_water_due_to_14carbon_production_minus_dark",
+            "units": "mg/m^3/day"
+        },
+        "prochlorococcus/.zarray": {
+            "chunks": [
+                5479,
+                1,
+                1,
+                7
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<f8",
+            "fill_value": "NaN",
+            "filters": null,
+            "order": "C",
+            "shape": [
+                10958,
+                1,
+                1,
+                7
+            ],
+            "zarr_format": 2
+        },
+        "prochlorococcus/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "time",
+                "latitude",
+                "longitude",
+                "depth"
+            ],
+            "coordinates": "during_day",
+            "long_name": "Prochlorococcus",
+            "units": "cells/ml"
+        },
+        "sieve_size/.zarray": {
+            "chunks": [
+                5
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<f8",
+            "fill_value": "NaN",
+            "filters": null,
+            "order": "C",
+            "shape": [
+                5
+            ],
+            "zarr_format": 2
+        },
+        "sieve_size/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "sieve_size"
+            ],
+            "long_name": "Sieve Size",
+            "units": "micrometer"
+        },
+        "synechococcus/.zarray": {
+            "chunks": [
+                5479,
+                1,
+                1,
+                7
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<f8",
+            "fill_value": "NaN",
+            "filters": null,
+            "order": "C",
+            "shape": [
+                10958,
+                1,
+                1,
+                7
+            ],
+            "zarr_format": 2
+        },
+        "synechococcus/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "time",
+                "latitude",
+                "longitude",
+                "depth"
+            ],
+            "coordinates": "during_day",
+            "long_name": "Synechococcus",
+            "units": "cells/ml"
+        },
+        "temperature/.zarray": {
+            "chunks": [
+                1,
+                1,
+                5479,
+                7
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<f8",
+            "fill_value": "NaN",
+            "filters": null,
+            "order": "C",
+            "shape": [
+                1,
+                1,
+                10958,
+                7
+            ],
+            "zarr_format": 2
+        },
+        "temperature/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "latitude",
+                "longitude",
+                "time",
+                "depth"
+            ],
+            "coordinates": "during_day",
+            "long_name": "Temperature",
+            "standard_name": "sea_water_temperature",
+            "units": "degC"
+        },
+        "time/.zarray": {
+            "chunks": [
+                10958
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<i8",
+            "fill_value": null,
+            "filters": null,
+            "order": "C",
+            "shape": [
+                10958
+            ],
+            "zarr_format": 2
+        },
+        "time/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "time"
+            ],
+            "axis": "T",
+            "calendar": "proleptic_gregorian",
+            "long_name": "Time",
+            "units": "minutes since 1994-01-12 00:00:00"
+        },
+        "zooplankton_epi/.zarray": {
+            "chunks": [
+                1,
+                1,
+                5479,
+                4,
+                3
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<f8",
+            "fill_value": "NaN",
+            "filters": null,
+            "order": "C",
+            "shape": [
+                1,
+                1,
+                10958,
+                7,
+                5
+            ],
+            "zarr_format": 2
+        },
+        "zooplankton_epi/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "latitude",
+                "longitude",
+                "time",
+                "depth",
+                "sieve_size"
+            ],
+            "coordinates": "during_day",
+            "long_name": "Dry Weight per Volume of Water",
+            "units": "milligram/meter^3"
+        },
+        "zooplankton_migrant_meso/.zarray": {
+            "chunks": [
+                1,
+                1,
+                5479,
+                4,
+                3
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<f8",
+            "fill_value": "NaN",
+            "filters": null,
+            "order": "C",
+            "shape": [
+                1,
+                1,
+                10958,
+                7,
+                5
+            ],
+            "zarr_format": 2
+        },
+        "zooplankton_migrant_meso/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "latitude",
+                "longitude",
+                "time",
+                "depth",
+                "sieve_size"
+            ],
+            "coordinates": "during_day",
+            "long_name": "Dry Weight per Volume of Water",
+            "units": "milligram/meter^3"
+        }
+    },
+    "zarr_consolidated_format": 1
+}

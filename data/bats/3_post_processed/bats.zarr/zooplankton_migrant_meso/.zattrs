@@ -1,0 +1,12 @@
+{
+    "_ARRAY_DIMENSIONS": [
+        "latitude",
+        "longitude",
+        "time",
+        "depth",
+        "sieve_size"
+    ],
+    "coordinates": "during_day",
+    "long_name": "Dry Weight per Volume of Water",
+    "units": "milligram/meter^3"
+}
