@@ -47,9 +47,3 @@ Data folder is organized as follows:
 ## Process
 
 Raw data is cleaned and saved (as preprocessed) with metadata in netcdf format. The preprocessed data is also available in CSV format for conveniance but without metadata.
-In the raw directory, there is a `<dataset>_metadata.md` file that describes the dataset as :
-
--   Variable name
--   Standard name
--   Long name
--   Units

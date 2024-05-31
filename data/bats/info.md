@@ -4,10 +4,10 @@ Link: [BATS](https://bats.bios.asu.edu/)
 
 ## TODO
 
--   [ ] Temperature
+-   [x] Temperature
+-   [x] Dissolved oxygen
+-   [x] Primary production
+-   [x] Phytoplankton groups
+-   [x] Zooplankton groups
 -   [ ] Surface wind
--   [ ] Dissolved oxygen
 -   [ ] Chlorophyll a
--   [ ] Primary production
--   [ ] Phytoplankton groups
--   [ ] Zooplankton groups
