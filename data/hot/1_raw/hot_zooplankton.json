@@ -1,0 +1,41 @@
+{
+    "cruise_number": {
+        "type": "int",
+        "long_name": "Cruise Number",
+        "standard_name": null,
+        "units": null
+    },
+    "date": {
+        "type": "int",
+        "long_name": "Date",
+        "standard_name": null,
+        "units": null
+    },
+    "time": {
+        "type": "int",
+        "long_name": "Time",
+        "standard_name": "time",
+        "units": null
+    },
+    "size_fraction": {
+        "type": "int",
+        "long_name": "size_fraction",
+        "standard_name": null,
+        "units": "mm",
+        "attrs": {
+            "desc": "Corresponds to the size of the mesh used to filter the sample"
+        }
+    },
+    "depth": {
+        "type": "float",
+        "long_name": "Depth",
+        "standard_name": "depth",
+        "units": "meter"
+    },
+    "zooplankton_dry_weight": {
+        "type": "float",
+        "long_name": "Zooplankton Dry Weight",
+        "standard_name": "mass_concentration_of_zooplankton_expressed_as_dry_weight_in_sea_water",
+        "units": "g/m2"
+    }
+}

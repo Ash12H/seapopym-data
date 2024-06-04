@@ -1,0 +1,171 @@
+{
+    "metadata": {
+        ".zattrs": {},
+        ".zgroup": {
+            "zarr_format": 2
+        },
+        "depth/.zarray": {
+            "chunks": [
+                9348
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<f8",
+            "fill_value": "NaN",
+            "filters": null,
+            "order": "C",
+            "shape": [
+                9348
+            ],
+            "zarr_format": 2
+        },
+        "depth/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "index"
+            ],
+            "axis": "Z",
+            "units": "meters"
+        },
+        "index/.zarray": {
+            "chunks": [
+                9348
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<i8",
+            "fill_value": null,
+            "filters": null,
+            "order": "C",
+            "shape": [
+                9348
+            ],
+            "zarr_format": 2
+        },
+        "index/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "index"
+            ]
+        },
+        "latitude/.zarray": {
+            "chunks": [
+                9348
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<f8",
+            "fill_value": "NaN",
+            "filters": null,
+            "order": "C",
+            "shape": [
+                9348
+            ],
+            "zarr_format": 2
+        },
+        "latitude/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "index"
+            ],
+            "axis": "Y",
+            "units": "degrees_north"
+        },
+        "longitude/.zarray": {
+            "chunks": [
+                9348
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<f8",
+            "fill_value": "NaN",
+            "filters": null,
+            "order": "C",
+            "shape": [
+                9348
+            ],
+            "zarr_format": 2
+        },
+        "longitude/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "index"
+            ],
+            "axis": "X",
+            "units": "degrees_east"
+        },
+        "time/.zarray": {
+            "chunks": [
+                9348
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<i8",
+            "fill_value": null,
+            "filters": null,
+            "order": "C",
+            "shape": [
+                9348
+            ],
+            "zarr_format": 2
+        },
+        "time/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "index"
+            ],
+            "axis": "T",
+            "calendar": "proleptic_gregorian",
+            "units": "minutes since 1994-02-17 11:08:00"
+        },
+        "zooplankton_dry_weight/.zarray": {
+            "chunks": [
+                9348
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<f8",
+            "fill_value": "NaN",
+            "filters": null,
+            "order": "C",
+            "shape": [
+                9348
+            ],
+            "zarr_format": 2
+        },
+        "zooplankton_dry_weight/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "index"
+            ],
+            "long_name": "Zooplankton Dry Weight",
+            "standard_name": "mass_concentration_of_zooplankton_expressed_as_dry_weight_in_sea_water",
+            "units": "g/m2"
+        }
+    },
+    "zarr_consolidated_format": 1
+}

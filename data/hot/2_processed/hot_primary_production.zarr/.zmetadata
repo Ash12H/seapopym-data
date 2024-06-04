@@ -1,0 +1,331 @@
+{
+    "metadata": {
+        ".zattrs": {},
+        ".zgroup": {
+            "zarr_format": 2
+        },
+        "bottle_salinity/.zarray": {
+            "chunks": [
+                2586
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<f8",
+            "fill_value": "NaN",
+            "filters": null,
+            "order": "C",
+            "shape": [
+                2586
+            ],
+            "zarr_format": 2
+        },
+        "bottle_salinity/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "index"
+            ],
+            "long_name": "Bottle Salinity",
+            "units": "PSS-78"
+        },
+        "chlorophyll/.zarray": {
+            "chunks": [
+                2586
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<f8",
+            "fill_value": "NaN",
+            "filters": null,
+            "order": "C",
+            "shape": [
+                2586
+            ],
+            "zarr_format": 2
+        },
+        "chlorophyll/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "index"
+            ],
+            "long_name": "Chlorophyll",
+            "units": "mg/m^3"
+        },
+        "depth/.zarray": {
+            "chunks": [
+                2586
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<f8",
+            "fill_value": "NaN",
+            "filters": null,
+            "order": "C",
+            "shape": [
+                2586
+            ],
+            "zarr_format": 2
+        },
+        "depth/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "index"
+            ],
+            "axis": "Z",
+            "units": "meters"
+        },
+        "eukaryotic_bacteria/.zarray": {
+            "chunks": [
+                2586
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<f8",
+            "fill_value": "NaN",
+            "filters": null,
+            "order": "C",
+            "shape": [
+                2586
+            ],
+            "zarr_format": 2
+        },
+        "eukaryotic_bacteria/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "index"
+            ],
+            "long_name": "Eukaryotic Bacteria",
+            "units": "#/ml"
+        },
+        "heterotrophic_bacteria/.zarray": {
+            "chunks": [
+                2586
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<f8",
+            "fill_value": "NaN",
+            "filters": null,
+            "order": "C",
+            "shape": [
+                2586
+            ],
+            "zarr_format": 2
+        },
+        "heterotrophic_bacteria/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "index"
+            ],
+            "long_name": "Heterotrophic Bacteria",
+            "units": "#/ml"
+        },
+        "index/.zarray": {
+            "chunks": [
+                2586
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<i8",
+            "fill_value": null,
+            "filters": null,
+            "order": "C",
+            "shape": [
+                2586
+            ],
+            "zarr_format": 2
+        },
+        "index/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "index"
+            ]
+        },
+        "instrument_type/.zarray": {
+            "chunks": [
+                2586
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<i8",
+            "fill_value": null,
+            "filters": null,
+            "order": "C",
+            "shape": [
+                2586
+            ],
+            "zarr_format": 2
+        },
+        "instrument_type/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "index"
+            ],
+            "long_name": "Instrument Type"
+        },
+        "latitude/.zarray": {
+            "chunks": [
+                2586
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<f8",
+            "fill_value": "NaN",
+            "filters": null,
+            "order": "C",
+            "shape": [
+                2586
+            ],
+            "zarr_format": 2
+        },
+        "latitude/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "index"
+            ],
+            "axis": "Y",
+            "units": "degrees_north"
+        },
+        "longitude/.zarray": {
+            "chunks": [
+                2586
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<f8",
+            "fill_value": "NaN",
+            "filters": null,
+            "order": "C",
+            "shape": [
+                2586
+            ],
+            "zarr_format": 2
+        },
+        "longitude/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "index"
+            ],
+            "axis": "X",
+            "units": "degrees_east"
+        },
+        "phototrophic_bacteria/.zarray": {
+            "chunks": [
+                2586
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<f8",
+            "fill_value": "NaN",
+            "filters": null,
+            "order": "C",
+            "shape": [
+                2586
+            ],
+            "zarr_format": 2
+        },
+        "phototrophic_bacteria/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "index"
+            ],
+            "long_name": "Phototrophic Bacteria",
+            "units": "#/ml"
+        },
+        "synechococcus_bacteria/.zarray": {
+            "chunks": [
+                2586
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<f8",
+            "fill_value": "NaN",
+            "filters": null,
+            "order": "C",
+            "shape": [
+                2586
+            ],
+            "zarr_format": 2
+        },
+        "synechococcus_bacteria/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "index"
+            ],
+            "long_name": "Synechococcus Bacteria",
+            "units": "#/ml"
+        },
+        "time/.zarray": {
+            "chunks": [
+                2586
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<i8",
+            "fill_value": null,
+            "filters": null,
+            "order": "C",
+            "shape": [
+                2586
+            ],
+            "zarr_format": 2
+        },
+        "time/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "index"
+            ],
+            "axis": "T",
+            "calendar": "proleptic_gregorian",
+            "units": "minutes since 1988-10-31 00:00:00"
+        }
+    },
+    "zarr_consolidated_format": 1
+}

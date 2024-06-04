@@ -1,0 +1,8 @@
+{
+    "_ARRAY_DIMENSIONS": [
+        "index"
+    ],
+    "long_name": "Zooplankton Dry Weight",
+    "standard_name": "mass_concentration_of_zooplankton_expressed_as_dry_weight_in_sea_water",
+    "units": "g/m2"
+}
