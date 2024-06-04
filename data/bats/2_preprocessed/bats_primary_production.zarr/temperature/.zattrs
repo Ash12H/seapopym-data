@@ -1,0 +1,8 @@
+{
+    "_ARRAY_DIMENSIONS": [
+        "index"
+    ],
+    "long_name": "Temperature",
+    "standard_name": "sea_water_temperature",
+    "units": "degC"
+}

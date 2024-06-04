@@ -1,0 +1,7 @@
+{
+    "_ARRAY_DIMENSIONS": [
+        "index"
+    ],
+    "long_name": "Bacteria Enumeration",
+    "units": "cells*10^8/kg"
+}

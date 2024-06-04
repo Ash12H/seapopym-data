@@ -29,8 +29,6 @@
                 "depth"
             ],
             "axis": "Z",
-            "long_name": "Depth",
-            "standard_name": "depth",
             "units": "meters"
         },
         "dissolved_oxygen/.zarray": {
@@ -110,8 +108,6 @@
                 "latitude"
             ],
             "axis": "Y",
-            "long_name": "Latitude",
-            "standard_name": "latitude",
             "units": "degrees_north"
         },
         "longitude/.zarray": {
@@ -139,8 +135,6 @@
                 "longitude"
             ],
             "axis": "X",
-            "long_name": "Longitude",
-            "standard_name": "longitude",
             "units": "degrees_east"
         },
         "nanoeukaryotes/.zarray": {
@@ -322,9 +316,9 @@
         },
         "temperature/.zarray": {
             "chunks": [
-                1,
-                1,
                 5479,
+                1,
+                1,
                 7
             ],
             "compressor": {
@@ -339,18 +333,18 @@
             "filters": null,
             "order": "C",
             "shape": [
-                1,
-                1,
                 10958,
+                1,
+                1,
                 7
             ],
             "zarr_format": 2
         },
         "temperature/.zattrs": {
             "_ARRAY_DIMENSIONS": [
+                "time",
                 "latitude",
                 "longitude",
-                "time",
                 "depth"
             ],
             "coordinates": "during_day",
@@ -384,7 +378,6 @@
             ],
             "axis": "T",
             "calendar": "proleptic_gregorian",
-            "long_name": "Time",
             "units": "minutes since 1994-01-12 00:00:00"
         },
         "zooplankton_epi/.zarray": {

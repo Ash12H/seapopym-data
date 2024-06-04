@@ -1,0 +1,140 @@
+{
+    "sample_bottle_identifier": {
+        "type": "int",
+        "long_name": "Sample bottle identifier",
+        "standard_name": null,
+        "units": null
+    },
+    "date_of_deployment": {
+        "type": "int",
+        "long_name": "Date of deployment",
+        "standard_name": null,
+        "units": null
+    },
+    "date_of_recovery": {
+        "type": "int",
+        "long_name": "Date of recovery",
+        "standard_name": null,
+        "units": null
+    },
+    "decimal_year_of_deployment": {
+        "type": "float",
+        "long_name": "Decimal Year of deployment",
+        "standard_name": null,
+        "units": null
+    },
+    "decimal_year_of_recovery": {
+        "type": "float",
+        "long_name": "Decimal Year of recovery",
+        "standard_name": null,
+        "units": null
+    },
+    "time_of_deployment": {
+        "type": "int",
+        "long_name": "Time of deployment",
+        "standard_name": null,
+        "units": null
+    },
+    "time_of_recovery": {
+        "type": "int",
+        "long_name": "Time of recovery",
+        "standard_name": null,
+        "units": null
+    },
+    "latitude_of_deployment": {
+        "type": "float",
+        "long_name": "Latitude of deployment",
+        "standard_name": "latitude",
+        "units": "degrees"
+    },
+    "latitude_of_recovery": {
+        "type": "float",
+        "long_name": "Latitude of recovery",
+        "standard_name": "latitude",
+        "units": "degrees"
+    },
+    "longitude_of_deployment": {
+        "type": "float",
+        "long_name": "Longitude of deployment",
+        "standard_name": "longitude",
+        "units": "degrees"
+    },
+    "longitude_of_recovery": {
+        "type": "float",
+        "long_name": "Longitude of recovery",
+        "standard_name": "longitude",
+        "units": "degrees"
+    },
+    "quality_flag": {
+        "type": "int",
+        "long_name": "Quality Flag",
+        "standard_name": null,
+        "units": null
+    },
+    "collection_depth": {
+        "type": "float",
+        "long_name": "Collection Depth",
+        "standard_name": "depth",
+        "units": "meters"
+    },
+    "pressure": {
+        "type": "float",
+        "long_name": "Pressure",
+        "standard_name": "sea_water_pressure",
+        "units": "decibars"
+    },
+    "temperature": {
+        "type": "float",
+        "long_name": "Temperature",
+        "standard_name": "sea_water_temperature",
+        "units": "degC"
+    },
+    "salinity_from_goflo_bottle_or_ctd": {
+        "type": "float",
+        "long_name": "Salinity",
+        "standard_name": "sea_water_salinity",
+        "units": null
+    },
+    "14c_primary_production_light_bottle_num_1": {
+        "type": "float",
+        "long_name": "14C Primary Production (light bottle #1)",
+        "standard_name": "mass_concentration_of_carbon_in_sea_water_due_to_14carbon_production_in_light",
+        "units": "mg/m^3/day",
+        "attrs": { "desc": "carbon weight" }
+    },
+    "14c_primary_production_light_bottle_num_2": {
+        "type": "float",
+        "long_name": "14C Primary Production (light bottle #2)",
+        "standard_name": "mass_concentration_of_carbon_in_sea_water_due_to_14carbon_production_in_light",
+        "units": "mg/m^3/day",
+        "attrs": { "desc": "carbon weight" }
+    },
+    "14c_primary_production_light_bottle_num_3": {
+        "type": "float",
+        "long_name": "14C Primary Production (light bottle #3)",
+        "standard_name": "mass_concentration_of_carbon_in_sea_water_due_to_14carbon_production_in_light",
+        "units": "mg/m^3/day",
+        "attrs": { "desc": "carbon weight" }
+    },
+    "14c_primary_production_dark_bottle": {
+        "type": "float",
+        "long_name": "14C Primary Production (dark bottle)",
+        "standard_name": "mass_concentration_of_carbon_in_sea_water_due_to_14carbon_production_in_dark",
+        "units": "mg/m^3/day",
+        "attrs": { "desc": "carbon weight" }
+    },
+    "14c_primary_production_time_zero": {
+        "type": "float",
+        "long_name": "14C Primary Production (Time zero)",
+        "standard_name": "mass_concentration_of_carbon_in_sea_water_due_to_14carbon_production_time_zero",
+        "units": "mg/m^3/day",
+        "attrs": { "desc": "carbon weight" }
+    },
+    "primary_production_mean_light_values_minus_dark_value": {
+        "type": "float",
+        "long_name": "Primary Production Mean Light values - Dark value",
+        "standard_name": "mass_concentration_of_carbon_in_sea_water_due_to_14carbon_production_minus_dark",
+        "units": "mg/m^3/day",
+        "attrs": { "desc": "carbon weight" }
+    }
+}

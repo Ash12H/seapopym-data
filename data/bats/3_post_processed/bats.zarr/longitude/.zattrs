@@ -3,7 +3,5 @@
         "longitude"
     ],
     "axis": "X",
-    "long_name": "Longitude",
-    "standard_name": "longitude",
     "units": "degrees_east"
 }

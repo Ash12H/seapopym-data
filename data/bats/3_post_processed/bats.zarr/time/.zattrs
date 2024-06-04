@@ -4,6 +4,5 @@
     ],
     "axis": "T",
     "calendar": "proleptic_gregorian",
-    "long_name": "Time",
     "units": "minutes since 1994-01-12 00:00:00"
 }

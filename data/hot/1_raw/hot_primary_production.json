@@ -1,0 +1,74 @@
+{
+    "cruise_number": {
+        "type": "int",
+        "long_name": "Cruise Number",
+        "standard_name": null,
+        "units": null
+    },
+    "date": {
+        "type": "int",
+        "long_name": "Date",
+        "standard_name": null,
+        "units": null
+    },
+    "start_time": {
+        "type": "int",
+        "long_name": "Start Time",
+        "standard_name": null,
+        "units": null
+    },
+    "end_time": {
+        "type": "int",
+        "long_name": "End Time",
+        "standard_name": null,
+        "units": null
+    },
+    "instrument_type": {
+        "type": "str",
+        "long_name": "Instrument Type",
+        "standard_name": null,
+        "units": null
+    },
+    "depth": {
+        "type": "float",
+        "long_name": "Depth",
+        "standard_name": "depth",
+        "units": "meter"
+    },
+    "chlorophyll": {
+        "type": "float",
+        "long_name": "Chlorophyll",
+        "standard_name": null,
+        "units": "mg/m^3"
+    },
+    "bottle_salinity": {
+        "type": "float",
+        "long_name": "Bottle Salinity",
+        "standard_name": null,
+        "units": "PSS-78"
+    },
+    "phototrophic_bacteria": {
+        "type": "int",
+        "long_name": "Phototrophic Bacteria",
+        "standard_name": null,
+        "units": "#/ml"
+    },
+    "heterotrophic_bacteria": {
+        "type": "int",
+        "long_name": "Heterotrophic Bacteria",
+        "standard_name": null,
+        "units": "#/ml"
+    },
+    "synechococcus_bacteria": {
+        "type": "int",
+        "long_name": "Synechococcus Bacteria",
+        "standard_name": null,
+        "units": "#/ml"
+    },
+    "eukaryotic_bacteria": {
+        "type": "int",
+        "long_name": "Eukaryotic Bacteria",
+        "standard_name": null,
+        "units": "#/ml"
+    }
+}

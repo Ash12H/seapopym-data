@@ -1,0 +1,8 @@
+{
+    "_ARRAY_DIMENSIONS": [
+        "index"
+    ],
+    "long_name": "Dissolved Inorganic Carbon",
+    "standard_name": "mole_concentration_of_dissolved_inorganic_carbon_in_sea_water",
+    "units": "micromoles/kg"
+}

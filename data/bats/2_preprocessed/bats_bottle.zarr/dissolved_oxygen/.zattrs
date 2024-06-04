@@ -1,0 +1,8 @@
+{
+    "_ARRAY_DIMENSIONS": [
+        "index"
+    ],
+    "long_name": "Dissolved Oxygen",
+    "standard_name": "mole_concentration_of_dissolved_molecular_oxygen_in_sea_water",
+    "units": "micromoles/kg"
+}

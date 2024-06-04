@@ -1,0 +1,8 @@
+{
+    "_ARRAY_DIMENSIONS": [
+        "index"
+    ],
+    "long_name": "Nitrite",
+    "standard_name": "mole_concentration_of_nitrite_in_sea_water",
+    "units": "micromoles/kg"
+}

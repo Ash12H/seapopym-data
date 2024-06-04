@@ -3,7 +3,5 @@
         "depth"
     ],
     "axis": "Z",
-    "long_name": "Depth",
-    "standard_name": "depth",
     "units": "meters"
 }

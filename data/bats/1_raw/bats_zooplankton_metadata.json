@@ -1,0 +1,140 @@
+{
+    "cruise_num": {
+        "type": "int",
+        "long_name": "Cruise Number",
+        "standard_name": null,
+        "units": null
+    },
+    "date": {
+        "type": "int",
+        "long_name": "Date",
+        "standard_name": null,
+        "units": null
+    },
+    "tow_num": {
+        "type": "int",
+        "long_name": "Tow Number",
+        "standard_name": null,
+        "units": null
+    },
+    "latitude_degrees": {
+        "type": "int",
+        "long_name": "Latitude",
+        "standard_name": "latitude",
+        "units": "degrees"
+    },
+    "latitude_minutes": {
+        "type": "float",
+        "long_name": "Latitude",
+        "standard_name": "latitude",
+        "units": "minutes"
+    },
+    "longitude_degrees": {
+        "type": "int",
+        "long_name": "Longitude",
+        "standard_name": "longitude",
+        "units": "degrees"
+    },
+    "longitude_minutes": {
+        "type": "float",
+        "long_name": "Longitude",
+        "standard_name": "longitude",
+        "units": "minutes"
+    },
+    "time_in_local": {
+        "type": "int",
+        "long_name": "Time of Water Collection (Local Time)",
+        "standard_name": null,
+        "units": null
+    },
+    "time_out_local": {
+        "type": "int",
+        "long_name": "Time of End of Water Collection (Local Time)",
+        "standard_name": null,
+        "units": null
+    },
+    "duration_minutes": {
+        "type": "int",
+        "long_name": "Duration of Collection",
+        "standard_name": null,
+        "units": "minutes"
+    },
+    "max_depth": {
+        "type": "float",
+        "long_name": "Maximum Depth",
+        "standard_name": null,
+        "units": "meter"
+    },
+    "volume_of_water_m3": {
+        "type": "float",
+        "long_name": "Volume of Water Sample",
+        "standard_name": null,
+        "units": "meter^3"
+    },
+    "sieve_size": {
+        "type": "int",
+        "long_name": "Sieve Size",
+        "standard_name": null,
+        "units": "micrometer"
+    },
+    "wet_weight_mg": {
+        "type": "float",
+        "long_name": "Wet Weight",
+        "standard_name": null,
+        "units": "milligram"
+    },
+    "dry_weight_mg": {
+        "type": "float",
+        "long_name": "Dry Weight",
+        "standard_name": null,
+        "units": "milligram"
+    },
+    "wet_weight_volume_of_water_mg_m3": {
+        "type": "float",
+        "long_name": "Wet Weight per Volume of Water",
+        "standard_name": null,
+        "units": "milligram/meter^3"
+    },
+    "dry_weight_volume_of_water_mg_m3": {
+        "type": "float",
+        "long_name": "Dry Weight per Volume of Water",
+        "standard_name": null,
+        "units": "milligram/meter^3"
+    },
+    "total_wet_weight_volume_all_size_fractions_mg_m3": {
+        "type": "float",
+        "long_name": "Total Wet Weight per Volume for all Size Fractions",
+        "standard_name": null,
+        "units": "milligram/meter^3"
+    },
+    "total_dry_weight_volume_all_size_fractions_mg_m3": {
+        "type": "float",
+        "long_name": "Total Dry Weight per Volume for all Size Fractions",
+        "standard_name": null,
+        "units": "milligram/meter^3"
+    },
+    "wet_weight_volume_of_water_normalized_200m_depth_mg_m3": {
+        "type": "float",
+        "long_name": "Wet Weight per Volume of Water Normalized for 200m Depth",
+        "standard_name": null,
+        "units": "milligram/meter^2"
+    },
+    "dry_weight_volume_of_water_normalized_200m_depth_mg_m3": {
+        "type": "float",
+        "long_name": "Dry Weight per Volume of Water Normalized for 200m Depth",
+        "standard_name": null,
+        "units": "milligram/meter^2"
+    },
+    "total_wet_weight_volume_all_size_fractions_normalized_200m_depth_mg_m3": {
+        "type": "float",
+        "long_name": "Total Wet Weight per Volume for all Size Fractions Normalized for 200m Depth",
+        "standard_name": null,
+        "units": "milligram/meter^2"
+    },
+    "total_dry_weight_volume_all_size_fractions_normalized_200m_depth_mg_m3": {
+        "type": "float",
+        "long_name": "Total Dry Weight per Volume for all Size Fractions Normalized for 200m Depth",
+        "standard_name": null,
+        "units": "milligram/meter^2"
+    }
+}
