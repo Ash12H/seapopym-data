@@ -1,8 +1,0 @@
-{
-    "_ARRAY_DIMENSIONS": [
-        "index"
-    ],
-    "long_name": "Pressure",
-    "standard_name": "sea_water_pressure",
-    "units": "decibars"
-}

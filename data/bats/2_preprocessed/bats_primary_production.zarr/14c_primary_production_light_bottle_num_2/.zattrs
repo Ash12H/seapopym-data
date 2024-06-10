@@ -1,9 +1,0 @@
-{
-    "_ARRAY_DIMENSIONS": [
-        "index"
-    ],
-    "desc": "carbon weight",
-    "long_name": "14C Primary Production (light bottle #2)",
-    "standard_name": "mass_concentration_of_carbon_in_sea_water_due_to_14carbon_production_in_light",
-    "units": "mg/m^3/day"
-}

@@ -1,8 +1,0 @@
-{
-    "_ARRAY_DIMENSIONS": [
-        "index"
-    ],
-    "long_name": "Silicate",
-    "standard_name": "mole_concentration_of_silicate_in_sea_water",
-    "units": "micromoles/kg"
-}

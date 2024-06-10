@@ -1,8 +1,0 @@
-{
-    "_ARRAY_DIMENSIONS": [
-        "index"
-    ],
-    "long_name": "Phosphate",
-    "standard_name": "mole_concentration_of_phosphate_in_sea_water",
-    "units": "micromoles/kg"
-}
