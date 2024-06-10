@@ -35,7 +35,7 @@
         },
         "dry_weight/.zarray": {
             "chunks": [
-                541,
+                671,
                 7,
                 1,
                 1,
@@ -53,7 +53,7 @@
             "filters": null,
             "order": "C",
             "shape": [
-                541,
+                1342,
                 7,
                 1,
                 1,
@@ -65,8 +65,8 @@
             "_ARRAY_DIMENSIONS": [
                 "time",
                 "depth",
-                "lat",
-                "lon",
+                "latitude",
+                "longitude",
                 "sieve_size"
             ],
             "acknowledgement": "Bermuda Institute of Ocean Sciences",
@@ -109,7 +109,7 @@
         },
         "dry_weight_vol_water_ratio/.zarray": {
             "chunks": [
-                541,
+                671,
                 7,
                 1,
                 1,
@@ -127,7 +127,7 @@
             "filters": null,
             "order": "C",
             "shape": [
-                541,
+                1342,
                 7,
                 1,
                 1,
@@ -139,8 +139,8 @@
             "_ARRAY_DIMENSIONS": [
                 "time",
                 "depth",
-                "lat",
-                "lon",
+                "latitude",
+                "longitude",
                 "sieve_size"
             ],
             "acknowledgement": "Bermuda Institute of Ocean Sciences",
@@ -183,7 +183,7 @@
         },
         "dry_weight_vol_water_ratio_200m_depth/.zarray": {
             "chunks": [
-                541,
+                671,
                 7,
                 1,
                 1,
@@ -201,7 +201,7 @@
             "filters": null,
             "order": "C",
             "shape": [
-                541,
+                1342,
                 7,
                 1,
                 1,
@@ -213,8 +213,8 @@
             "_ARRAY_DIMENSIONS": [
                 "time",
                 "depth",
-                "lat",
-                "lon",
+                "latitude",
+                "longitude",
                 "sieve_size"
             ],
             "acknowledgement": "Bermuda Institute of Ocean Sciences",
@@ -255,7 +255,7 @@
             "variable_std": 116.2719544158,
             "visualize": 1.0
         },
-        "lat/.zarray": {
+        "latitude/.zarray": {
             "chunks": [
                 1
             ],
@@ -275,16 +275,16 @@
             ],
             "zarr_format": 2
         },
-        "lat/.zattrs": {
+        "latitude/.zattrs": {
             "_ARRAY_DIMENSIONS": [
-                "lat"
+                "latitude"
             ],
             "axis": "Y",
             "long_name": "latitude",
             "standard_name": "latitude",
             "units": "degrees_north"
         },
-        "lon/.zarray": {
+        "longitude/.zarray": {
             "chunks": [
                 1
             ],
@@ -304,9 +304,9 @@
             ],
             "zarr_format": 2
         },
-        "lon/.zattrs": {
+        "longitude/.zattrs": {
             "_ARRAY_DIMENSIONS": [
-                "lon"
+                "longitude"
             ],
             "axis": "X",
             "long_name": "longitude",
@@ -343,7 +343,7 @@
         },
         "time/.zarray": {
             "chunks": [
-                541
+                1342
             ],
             "compressor": {
                 "blocksize": 0,
@@ -357,7 +357,7 @@
             "filters": null,
             "order": "C",
             "shape": [
-                541
+                1342
             ],
             "zarr_format": 2
         },
@@ -369,11 +369,11 @@
             "calendar": "proleptic_gregorian",
             "long_name": "time",
             "standard_name": "time",
-            "units": "days since 1995-05-10 00:00:00"
+            "units": "minutes since 1995-05-10 22:37:00"
         },
         "total_dry_weight_volume_all_size_fractions_200m/.zarray": {
             "chunks": [
-                541,
+                671,
                 7,
                 1,
                 1,
@@ -391,7 +391,7 @@
             "filters": null,
             "order": "C",
             "shape": [
-                541,
+                1342,
                 7,
                 1,
                 1,
@@ -403,8 +403,8 @@
             "_ARRAY_DIMENSIONS": [
                 "time",
                 "depth",
-                "lat",
-                "lon",
+                "latitude",
+                "longitude",
                 "sieve_size"
             ],
             "acknowledgement": "Bermuda Institute of Ocean Sciences",
@@ -447,7 +447,7 @@
         },
         "total_dry_weight_volume_all_size_fractions_ratio/.zarray": {
             "chunks": [
-                541,
+                671,
                 7,
                 1,
                 1,
@@ -465,7 +465,7 @@
             "filters": null,
             "order": "C",
             "shape": [
-                541,
+                1342,
                 7,
                 1,
                 1,
@@ -477,8 +477,8 @@
             "_ARRAY_DIMENSIONS": [
                 "time",
                 "depth",
-                "lat",
-                "lon",
+                "latitude",
+                "longitude",
                 "sieve_size"
             ],
             "acknowledgement": "Bermuda Institute of Ocean Sciences",
@@ -521,7 +521,7 @@
         },
         "total_wet_weight_volume_all_size_fractions_200m/.zarray": {
             "chunks": [
-                541,
+                671,
                 7,
                 1,
                 1,
@@ -539,7 +539,7 @@
             "filters": null,
             "order": "C",
             "shape": [
-                541,
+                1342,
                 7,
                 1,
                 1,
@@ -551,8 +551,8 @@
             "_ARRAY_DIMENSIONS": [
                 "time",
                 "depth",
-                "lat",
-                "lon",
+                "latitude",
+                "longitude",
                 "sieve_size"
             ],
             "acknowledgement": "Bermuda Institute of Ocean Sciences",
@@ -595,7 +595,7 @@
         },
         "total_wet_weight_volume_all_size_fractions_ratio/.zarray": {
             "chunks": [
-                541,
+                671,
                 7,
                 1,
                 1,
@@ -613,7 +613,7 @@
             "filters": null,
             "order": "C",
             "shape": [
-                541,
+                1342,
                 7,
                 1,
                 1,
@@ -625,8 +625,8 @@
             "_ARRAY_DIMENSIONS": [
                 "time",
                 "depth",
-                "lat",
-                "lon",
+                "latitude",
+                "longitude",
                 "sieve_size"
             ],
             "acknowledgement": "Bermuda Institute of Ocean Sciences",
@@ -669,7 +669,7 @@
         },
         "volume_water/.zarray": {
             "chunks": [
-                541,
+                671,
                 7,
                 1,
                 1,
@@ -687,7 +687,7 @@
             "filters": null,
             "order": "C",
             "shape": [
-                541,
+                1342,
                 7,
                 1,
                 1,
@@ -699,8 +699,8 @@
             "_ARRAY_DIMENSIONS": [
                 "time",
                 "depth",
-                "lat",
-                "lon",
+                "latitude",
+                "longitude",
                 "sieve_size"
             ],
             "acknowledgement": "Bermuda Institute of Ocean Sciences",
@@ -743,7 +743,7 @@
         },
         "wet_weight/.zarray": {
             "chunks": [
-                541,
+                671,
                 7,
                 1,
                 1,
@@ -761,7 +761,7 @@
             "filters": null,
             "order": "C",
             "shape": [
-                541,
+                1342,
                 7,
                 1,
                 1,
@@ -773,8 +773,8 @@
             "_ARRAY_DIMENSIONS": [
                 "time",
                 "depth",
-                "lat",
-                "lon",
+                "latitude",
+                "longitude",
                 "sieve_size"
             ],
             "acknowledgement": "Bermuda Institute of Ocean Sciences",
@@ -817,7 +817,7 @@
         },
         "wet_weight_vol_water_ratio/.zarray": {
             "chunks": [
-                541,
+                671,
                 7,
                 1,
                 1,
@@ -835,7 +835,7 @@
             "filters": null,
             "order": "C",
             "shape": [
-                541,
+                1342,
                 7,
                 1,
                 1,
@@ -847,8 +847,8 @@
             "_ARRAY_DIMENSIONS": [
                 "time",
                 "depth",
-                "lat",
-                "lon",
+                "latitude",
+                "longitude",
                 "sieve_size"
             ],
             "acknowledgement": "Bermuda Institute of Ocean Sciences",
@@ -891,7 +891,7 @@
         },
         "wet_weight_vol_water_ratio_200m_depth/.zarray": {
             "chunks": [
-                541,
+                671,
                 7,
                 1,
                 1,
@@ -909,7 +909,7 @@
             "filters": null,
             "order": "C",
             "shape": [
-                541,
+                1342,
                 7,
                 1,
                 1,
@@ -921,8 +921,8 @@
             "_ARRAY_DIMENSIONS": [
                 "time",
                 "depth",
-                "lat",
-                "lon",
+                "latitude",
+                "longitude",
                 "sieve_size"
             ],
             "acknowledgement": "Bermuda Institute of Ocean Sciences",
