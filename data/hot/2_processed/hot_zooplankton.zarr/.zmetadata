@@ -6,7 +6,8 @@
         },
         "abnd/.zarray": {
             "chunks": [
-                777,
+                274,
+                2,
                 1,
                 1,
                 8,
@@ -24,7 +25,8 @@
             "filters": null,
             "order": "C",
             "shape": [
-                1554,
+                548,
+                2,
                 1,
                 1,
                 8,
@@ -35,6 +37,7 @@
         "abnd/.zattrs": {
             "_ARRAY_DIMENSIONS": [
                 "time",
+                "is_day",
                 "lat",
                 "lon",
                 "depth",
@@ -80,7 +83,8 @@
         },
         "carb/.zarray": {
             "chunks": [
-                777,
+                274,
+                2,
                 1,
                 1,
                 8,
@@ -98,7 +102,8 @@
             "filters": null,
             "order": "C",
             "shape": [
-                1554,
+                548,
+                2,
                 1,
                 1,
                 8,
@@ -109,6 +114,7 @@
         "carb/.zattrs": {
             "_ARRAY_DIMENSIONS": [
                 "time",
+                "is_day",
                 "lat",
                 "lon",
                 "depth",
@@ -183,7 +189,8 @@
         },
         "dwt/.zarray": {
             "chunks": [
-                777,
+                274,
+                2,
                 1,
                 1,
                 8,
@@ -201,7 +208,8 @@
             "filters": null,
             "order": "C",
             "shape": [
-                1554,
+                548,
+                2,
                 1,
                 1,
                 8,
@@ -212,6 +220,7 @@
         "dwt/.zattrs": {
             "_ARRAY_DIMENSIONS": [
                 "time",
+                "is_day",
                 "lat",
                 "lon",
                 "depth",
@@ -283,6 +292,37 @@
             "standard_name": "fraction",
             "units": "mm"
         },
+        "is_day/.zarray": {
+            "chunks": [
+                2
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "|i1",
+            "fill_value": null,
+            "filters": null,
+            "order": "C",
+            "shape": [
+                2
+            ],
+            "zarr_format": 2
+        },
+        "is_day/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "is_day"
+            ],
+            "description": "Flag to indicate if the time is during the day or night",
+            "dtype": "bool",
+            "flag_meanings": "day night",
+            "flag_values": "[True, False]",
+            "long_name": "Is day",
+            "standard_name": "is_day"
+        },
         "lat/.zarray": {
             "chunks": [
                 1
@@ -343,7 +383,8 @@
         },
         "nit/.zarray": {
             "chunks": [
-                777,
+                274,
+                2,
                 1,
                 1,
                 8,
@@ -361,7 +402,8 @@
             "filters": null,
             "order": "C",
             "shape": [
-                1554,
+                548,
+                2,
                 1,
                 1,
                 8,
@@ -372,6 +414,7 @@
         "nit/.zattrs": {
             "_ARRAY_DIMENSIONS": [
                 "time",
+                "is_day",
                 "lat",
                 "lon",
                 "depth",
@@ -417,7 +460,8 @@
         },
         "svol/.zarray": {
             "chunks": [
-                777,
+                274,
+                2,
                 1,
                 1,
                 8,
@@ -435,7 +479,8 @@
             "filters": null,
             "order": "C",
             "shape": [
-                1554,
+                548,
+                2,
                 1,
                 1,
                 8,
@@ -446,6 +491,7 @@
         "svol/.zattrs": {
             "_ARRAY_DIMENSIONS": [
                 "time",
+                "is_day",
                 "lat",
                 "lon",
                 "depth",
@@ -491,7 +537,7 @@
         },
         "time/.zarray": {
             "chunks": [
-                1554
+                548
             ],
             "compressor": {
                 "blocksize": 0,
@@ -505,7 +551,7 @@
             "filters": null,
             "order": "C",
             "shape": [
-                1554
+                548
             ],
             "zarr_format": 2
         },
@@ -517,11 +563,12 @@
             "calendar": "proleptic_gregorian",
             "long_name": "time",
             "standard_name": "time",
-            "units": "minutes since 1994-02-17 11:08:00"
+            "units": "days since 1994-02-17 00:00:00"
         },
         "vol/.zarray": {
             "chunks": [
-                777,
+                274,
+                2,
                 1,
                 1,
                 8,
@@ -539,7 +586,8 @@
             "filters": null,
             "order": "C",
             "shape": [
-                1554,
+                548,
+                2,
                 1,
                 1,
                 8,
@@ -550,6 +598,7 @@
         "vol/.zattrs": {
             "_ARRAY_DIMENSIONS": [
                 "time",
+                "is_day",
                 "lat",
                 "lon",
                 "depth",
@@ -595,7 +644,8 @@
         },
         "wwt/.zarray": {
             "chunks": [
-                777,
+                274,
+                2,
                 1,
                 1,
                 8,
@@ -613,7 +663,8 @@
             "filters": null,
             "order": "C",
             "shape": [
-                1554,
+                548,
+                2,
                 1,
                 1,
                 8,
@@ -624,6 +675,7 @@
         "wwt/.zattrs": {
             "_ARRAY_DIMENSIONS": [
                 "time",
+                "is_day",
                 "lat",
                 "lon",
                 "depth",
