@@ -35,7 +35,8 @@
         },
         "dry_weight/.zarray": {
             "chunks": [
-                671,
+                271,
+                2,
                 7,
                 1,
                 1,
@@ -53,7 +54,8 @@
             "filters": null,
             "order": "C",
             "shape": [
-                1342,
+                541,
+                2,
                 7,
                 1,
                 1,
@@ -64,6 +66,7 @@
         "dry_weight/.zattrs": {
             "_ARRAY_DIMENSIONS": [
                 "time",
+                "is_day",
                 "depth",
                 "latitude",
                 "longitude",
@@ -109,7 +112,8 @@
         },
         "dry_weight_vol_water_ratio/.zarray": {
             "chunks": [
-                671,
+                271,
+                2,
                 7,
                 1,
                 1,
@@ -127,7 +131,8 @@
             "filters": null,
             "order": "C",
             "shape": [
-                1342,
+                541,
+                2,
                 7,
                 1,
                 1,
@@ -138,6 +143,7 @@
         "dry_weight_vol_water_ratio/.zattrs": {
             "_ARRAY_DIMENSIONS": [
                 "time",
+                "is_day",
                 "depth",
                 "latitude",
                 "longitude",
@@ -183,7 +189,8 @@
         },
         "dry_weight_vol_water_ratio_200m_depth/.zarray": {
             "chunks": [
-                671,
+                271,
+                2,
                 7,
                 1,
                 1,
@@ -201,7 +208,8 @@
             "filters": null,
             "order": "C",
             "shape": [
-                1342,
+                541,
+                2,
                 7,
                 1,
                 1,
@@ -212,6 +220,7 @@
         "dry_weight_vol_water_ratio_200m_depth/.zattrs": {
             "_ARRAY_DIMENSIONS": [
                 "time",
+                "is_day",
                 "depth",
                 "latitude",
                 "longitude",
@@ -254,6 +263,37 @@
             "variable_min": 0.0,
             "variable_std": 116.2719544158,
             "visualize": 1.0
+        },
+        "is_day/.zarray": {
+            "chunks": [
+                2
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "|i1",
+            "fill_value": null,
+            "filters": null,
+            "order": "C",
+            "shape": [
+                2
+            ],
+            "zarr_format": 2
+        },
+        "is_day/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "is_day"
+            ],
+            "description": "Flag to indicate if the time is during the day or night",
+            "dtype": "bool",
+            "flag_meanings": "day night",
+            "flag_values": "[True, False]",
+            "long_name": "Is day",
+            "standard_name": "is_day"
         },
         "latitude/.zarray": {
             "chunks": [
@@ -343,7 +383,7 @@
         },
         "time/.zarray": {
             "chunks": [
-                1342
+                541
             ],
             "compressor": {
                 "blocksize": 0,
@@ -357,7 +397,7 @@
             "filters": null,
             "order": "C",
             "shape": [
-                1342
+                541
             ],
             "zarr_format": 2
         },
@@ -369,11 +409,12 @@
             "calendar": "proleptic_gregorian",
             "long_name": "time",
             "standard_name": "time",
-            "units": "minutes since 1995-05-10 22:37:00"
+            "units": "days since 1995-05-10 00:00:00"
         },
         "total_dry_weight_volume_all_size_fractions_200m/.zarray": {
             "chunks": [
-                671,
+                271,
+                2,
                 7,
                 1,
                 1,
@@ -391,7 +432,8 @@
             "filters": null,
             "order": "C",
             "shape": [
-                1342,
+                541,
+                2,
                 7,
                 1,
                 1,
@@ -402,6 +444,7 @@
         "total_dry_weight_volume_all_size_fractions_200m/.zattrs": {
             "_ARRAY_DIMENSIONS": [
                 "time",
+                "is_day",
                 "depth",
                 "latitude",
                 "longitude",
@@ -447,7 +490,8 @@
         },
         "total_dry_weight_volume_all_size_fractions_ratio/.zarray": {
             "chunks": [
-                671,
+                271,
+                2,
                 7,
                 1,
                 1,
@@ -465,7 +509,8 @@
             "filters": null,
             "order": "C",
             "shape": [
-                1342,
+                541,
+                2,
                 7,
                 1,
                 1,
@@ -476,6 +521,7 @@
         "total_dry_weight_volume_all_size_fractions_ratio/.zattrs": {
             "_ARRAY_DIMENSIONS": [
                 "time",
+                "is_day",
                 "depth",
                 "latitude",
                 "longitude",
@@ -521,7 +567,8 @@
         },
         "total_wet_weight_volume_all_size_fractions_200m/.zarray": {
             "chunks": [
-                671,
+                271,
+                2,
                 7,
                 1,
                 1,
@@ -539,7 +586,8 @@
             "filters": null,
             "order": "C",
             "shape": [
-                1342,
+                541,
+                2,
                 7,
                 1,
                 1,
@@ -550,6 +598,7 @@
         "total_wet_weight_volume_all_size_fractions_200m/.zattrs": {
             "_ARRAY_DIMENSIONS": [
                 "time",
+                "is_day",
                 "depth",
                 "latitude",
                 "longitude",
@@ -595,7 +644,8 @@
         },
         "total_wet_weight_volume_all_size_fractions_ratio/.zarray": {
             "chunks": [
-                671,
+                271,
+                2,
                 7,
                 1,
                 1,
@@ -613,7 +663,8 @@
             "filters": null,
             "order": "C",
             "shape": [
-                1342,
+                541,
+                2,
                 7,
                 1,
                 1,
@@ -624,6 +675,7 @@
         "total_wet_weight_volume_all_size_fractions_ratio/.zattrs": {
             "_ARRAY_DIMENSIONS": [
                 "time",
+                "is_day",
                 "depth",
                 "latitude",
                 "longitude",
@@ -669,7 +721,8 @@
         },
         "volume_water/.zarray": {
             "chunks": [
-                671,
+                271,
+                2,
                 7,
                 1,
                 1,
@@ -687,7 +740,8 @@
             "filters": null,
             "order": "C",
             "shape": [
-                1342,
+                541,
+                2,
                 7,
                 1,
                 1,
@@ -698,6 +752,7 @@
         "volume_water/.zattrs": {
             "_ARRAY_DIMENSIONS": [
                 "time",
+                "is_day",
                 "depth",
                 "latitude",
                 "longitude",
@@ -743,7 +798,8 @@
         },
         "wet_weight/.zarray": {
             "chunks": [
-                671,
+                271,
+                2,
                 7,
                 1,
                 1,
@@ -761,7 +817,8 @@
             "filters": null,
             "order": "C",
             "shape": [
-                1342,
+                541,
+                2,
                 7,
                 1,
                 1,
@@ -772,6 +829,7 @@
         "wet_weight/.zattrs": {
             "_ARRAY_DIMENSIONS": [
                 "time",
+                "is_day",
                 "depth",
                 "latitude",
                 "longitude",
@@ -817,7 +875,8 @@
         },
         "wet_weight_vol_water_ratio/.zarray": {
             "chunks": [
-                671,
+                271,
+                2,
                 7,
                 1,
                 1,
@@ -835,7 +894,8 @@
             "filters": null,
             "order": "C",
             "shape": [
-                1342,
+                541,
+                2,
                 7,
                 1,
                 1,
@@ -846,6 +906,7 @@
         "wet_weight_vol_water_ratio/.zattrs": {
             "_ARRAY_DIMENSIONS": [
                 "time",
+                "is_day",
                 "depth",
                 "latitude",
                 "longitude",
@@ -891,7 +952,8 @@
         },
         "wet_weight_vol_water_ratio_200m_depth/.zarray": {
             "chunks": [
-                671,
+                271,
+                2,
                 7,
                 1,
                 1,
@@ -909,7 +971,8 @@
             "filters": null,
             "order": "C",
             "shape": [
-                1342,
+                541,
+                2,
                 7,
                 1,
                 1,
@@ -920,6 +983,7 @@
         "wet_weight_vol_water_ratio_200m_depth/.zattrs": {
             "_ARRAY_DIMENSIONS": [
                 "time",
+                "is_day",
                 "depth",
                 "latitude",
                 "longitude",

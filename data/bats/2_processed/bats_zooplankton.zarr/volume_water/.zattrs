@@ -1,6 +1,7 @@
 {
     "_ARRAY_DIMENSIONS": [
         "time",
+        "is_day",
         "depth",
         "latitude",
         "longitude",
