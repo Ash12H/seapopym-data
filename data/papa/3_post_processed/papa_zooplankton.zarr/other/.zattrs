@@ -1,0 +1,10 @@
+{
+    "_ARRAY_DIMENSIONS": [
+        "time",
+        "is_day",
+        "latitude",
+        "longitude",
+        "depth"
+    ],
+    "units": "mg/m3"
+}
