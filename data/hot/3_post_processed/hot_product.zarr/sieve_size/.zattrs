@@ -1,6 +1,6 @@
 {
     "_ARRAY_DIMENSIONS": [
-        "frac"
+        "sieve_size"
     ],
     "long_name": "fraction",
     "standard_name": "fraction",

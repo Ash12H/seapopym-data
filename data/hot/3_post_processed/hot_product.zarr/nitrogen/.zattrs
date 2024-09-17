@@ -2,10 +2,10 @@
     "_ARRAY_DIMENSIONS": [
         "time",
         "is_day",
-        "lat",
-        "lon",
+        "latitude",
+        "longitude",
         "depth",
-        "frac"
+        "sieve_size"
     ],
     "acknowledgement": "''Data obtained via the Hawaii Ocean Time-series HOT-DOGS application; University of Hawai'i at Manoa. National Science Foundation Award # 1756517''. https://hahana.soest.hawaii.edu/hot/hot-dogs/",
     "comment": NaN,

@@ -38,10 +38,10 @@
             "_ARRAY_DIMENSIONS": [
                 "time",
                 "is_day",
-                "lat",
-                "lon",
+                "latitude",
+                "longitude",
                 "depth",
-                "frac"
+                "sieve_size"
             ],
             "acknowledgement": "''Data obtained via the Hawaii Ocean Time-series HOT-DOGS application; University of Hawai'i at Manoa. National Science Foundation Award # 1756517''. https://hahana.soest.hawaii.edu/hot/hot-dogs/",
             "comment": NaN,
@@ -110,8 +110,8 @@
         "bsal/.zattrs": {
             "_ARRAY_DIMENSIONS": [
                 "time",
-                "lat",
-                "lon",
+                "latitude",
+                "longitude",
                 "depth"
             ],
             "acknowledgement": "''Data obtained via the Hawaii Ocean Time-series HOT-DOGS application; University of Hawai'i at Manoa. National Science Foundation Award # 1756517''. https://hahana.soest.hawaii.edu/hot/hot-dogs/",
@@ -186,10 +186,10 @@
             "_ARRAY_DIMENSIONS": [
                 "time",
                 "is_day",
-                "lat",
-                "lon",
+                "latitude",
+                "longitude",
                 "depth",
-                "frac"
+                "sieve_size"
             ],
             "acknowledgement": "''Data obtained via the Hawaii Ocean Time-series HOT-DOGS application; University of Hawai'i at Manoa. National Science Foundation Award # 1756517''. https://hahana.soest.hawaii.edu/hot/hot-dogs/",
             "comment": NaN,
@@ -258,8 +258,8 @@
         "chl/.zattrs": {
             "_ARRAY_DIMENSIONS": [
                 "time",
-                "lat",
-                "lon",
+                "latitude",
+                "longitude",
                 "depth"
             ],
             "acknowledgement": "''Data obtained via the Hawaii Ocean Time-series HOT-DOGS application; University of Hawai'i at Manoa. National Science Foundation Award # 1756517''. https://hahana.soest.hawaii.edu/hot/hot-dogs/",
@@ -329,8 +329,8 @@
         "d12/.zattrs": {
             "_ARRAY_DIMENSIONS": [
                 "time",
-                "lat",
-                "lon",
+                "latitude",
+                "longitude",
                 "depth"
             ],
             "acknowledgement": "''Data obtained via the Hawaii Ocean Time-series HOT-DOGS application; University of Hawai'i at Manoa. National Science Foundation Award # 1756517''. https://hahana.soest.hawaii.edu/hot/hot-dogs/",
@@ -434,10 +434,10 @@
             "_ARRAY_DIMENSIONS": [
                 "time",
                 "is_day",
-                "lat",
-                "lon",
+                "latitude",
+                "longitude",
                 "depth",
-                "frac"
+                "sieve_size"
             ],
             "acknowledgement": "''Data obtained via the Hawaii Ocean Time-series HOT-DOGS application; University of Hawai'i at Manoa. National Science Foundation Award # 1756517''. https://hahana.soest.hawaii.edu/hot/hot-dogs/",
             "comment": NaN,
@@ -506,8 +506,8 @@
         "ebact/.zattrs": {
             "_ARRAY_DIMENSIONS": [
                 "time",
-                "lat",
-                "lon",
+                "latitude",
+                "longitude",
                 "depth"
             ],
             "acknowledgement": "''Data obtained via the Hawaii Ocean Time-series HOT-DOGS application; University of Hawai'i at Manoa. National Science Foundation Award # 1756517''. https://hahana.soest.hawaii.edu/hot/hot-dogs/",
@@ -577,8 +577,8 @@
         "fluor/.zattrs": {
             "_ARRAY_DIMENSIONS": [
                 "time",
-                "lat",
-                "lon",
+                "latitude",
+                "longitude",
                 "depth"
             ],
             "acknowledgement": "''Data obtained via the Hawaii Ocean Time-series HOT-DOGS application; University of Hawai'i at Manoa. National Science Foundation Award # 1756517''. https://hahana.soest.hawaii.edu/hot/hot-dogs/",
@@ -619,34 +619,6 @@
             "variable_std": 83.1049125142,
             "visualize": 1.0
         },
-        "frac/.zarray": {
-            "chunks": [
-                5
-            ],
-            "compressor": {
-                "blocksize": 0,
-                "clevel": 5,
-                "cname": "lz4",
-                "id": "blosc",
-                "shuffle": 1
-            },
-            "dtype": "<f8",
-            "fill_value": "NaN",
-            "filters": null,
-            "order": "C",
-            "shape": [
-                5
-            ],
-            "zarr_format": 2
-        },
-        "frac/.zattrs": {
-            "_ARRAY_DIMENSIONS": [
-                "frac"
-            ],
-            "long_name": "fraction",
-            "standard_name": "fraction",
-            "units": "mm"
-        },
         "hbact/.zarray": {
             "chunks": [
                 310,
@@ -676,8 +648,8 @@
         "hbact/.zattrs": {
             "_ARRAY_DIMENSIONS": [
                 "time",
-                "lat",
-                "lon",
+                "latitude",
+                "longitude",
                 "depth"
             ],
             "acknowledgement": "''Data obtained via the Hawaii Ocean Time-series HOT-DOGS application; University of Hawai'i at Manoa. National Science Foundation Award # 1756517''. https://hahana.soest.hawaii.edu/hot/hot-dogs/",
@@ -778,8 +750,8 @@
         "l12/.zattrs": {
             "_ARRAY_DIMENSIONS": [
                 "time",
-                "lat",
-                "lon",
+                "latitude",
+                "longitude",
                 "depth"
             ],
             "acknowledgement": "''Data obtained via the Hawaii Ocean Time-series HOT-DOGS application; University of Hawai'i at Manoa. National Science Foundation Award # 1756517''. https://hahana.soest.hawaii.edu/hot/hot-dogs/",
@@ -820,7 +792,7 @@
             "variable_std": 2.9437358664,
             "visualize": 1.0
         },
-        "lat/.zarray": {
+        "latitude/.zarray": {
             "chunks": [
                 1
             ],
@@ -840,16 +812,16 @@
             ],
             "zarr_format": 2
         },
-        "lat/.zattrs": {
+        "latitude/.zattrs": {
             "_ARRAY_DIMENSIONS": [
-                "lat"
+                "latitude"
             ],
             "axis": "Y",
             "long_name": "latitude",
             "standard_name": "latitude",
             "units": "degrees_north"
         },
-        "lon/.zarray": {
+        "longitude/.zarray": {
             "chunks": [
                 1
             ],
@@ -869,9 +841,9 @@
             ],
             "zarr_format": 2
         },
-        "lon/.zattrs": {
+        "longitude/.zattrs": {
             "_ARRAY_DIMENSIONS": [
-                "lon"
+                "longitude"
             ],
             "axis": "X",
             "long_name": "longitude",
@@ -907,8 +879,8 @@
         "nitrate/.zattrs": {
             "_ARRAY_DIMENSIONS": [
                 "time",
-                "lat",
-                "lon",
+                "latitude",
+                "longitude",
                 "depth"
             ],
             "acknowledgement": "''Data obtained via the Hawaii Ocean Time-series HOT-DOGS application; University of Hawai'i at Manoa. National Science Foundation Award # 1756517''. https://hahana.soest.hawaii.edu/hot/hot-dogs/",
@@ -983,10 +955,10 @@
             "_ARRAY_DIMENSIONS": [
                 "time",
                 "is_day",
-                "lat",
-                "lon",
+                "latitude",
+                "longitude",
                 "depth",
-                "frac"
+                "sieve_size"
             ],
             "acknowledgement": "''Data obtained via the Hawaii Ocean Time-series HOT-DOGS application; University of Hawai'i at Manoa. National Science Foundation Award # 1756517''. https://hahana.soest.hawaii.edu/hot/hot-dogs/",
             "comment": NaN,
@@ -1055,8 +1027,8 @@
         "oxy/.zattrs": {
             "_ARRAY_DIMENSIONS": [
                 "time",
-                "lat",
-                "lon",
+                "latitude",
+                "longitude",
                 "depth"
             ],
             "acknowledgement": "''Data obtained via the Hawaii Ocean Time-series HOT-DOGS application; University of Hawai'i at Manoa. National Science Foundation Award # 1756517''. https://hahana.soest.hawaii.edu/hot/hot-dogs/",
@@ -1126,8 +1098,8 @@
         "pbact/.zattrs": {
             "_ARRAY_DIMENSIONS": [
                 "time",
-                "lat",
-                "lon",
+                "latitude",
+                "longitude",
                 "depth"
             ],
             "acknowledgement": "''Data obtained via the Hawaii Ocean Time-series HOT-DOGS application; University of Hawai'i at Manoa. National Science Foundation Award # 1756517''. https://hahana.soest.hawaii.edu/hot/hot-dogs/",
@@ -1197,8 +1169,8 @@
         "phaeo/.zattrs": {
             "_ARRAY_DIMENSIONS": [
                 "time",
-                "lat",
-                "lon",
+                "latitude",
+                "longitude",
                 "depth"
             ],
             "acknowledgement": "''Data obtained via the Hawaii Ocean Time-series HOT-DOGS application; University of Hawai'i at Manoa. National Science Foundation Award # 1756517''. https://hahana.soest.hawaii.edu/hot/hot-dogs/",
@@ -1268,8 +1240,8 @@
         "press/.zattrs": {
             "_ARRAY_DIMENSIONS": [
                 "time",
-                "lat",
-                "lon",
+                "latitude",
+                "longitude",
                 "depth"
             ],
             "acknowledgement": "''Data obtained via the Hawaii Ocean Time-series HOT-DOGS application; University of Hawai'i at Manoa. National Science Foundation Award # 1756517''. https://hahana.soest.hawaii.edu/hot/hot-dogs/",
@@ -1339,8 +1311,8 @@
         "sal/.zattrs": {
             "_ARRAY_DIMENSIONS": [
                 "time",
-                "lat",
-                "lon",
+                "latitude",
+                "longitude",
                 "depth"
             ],
             "acknowledgement": "''Data obtained via the Hawaii Ocean Time-series HOT-DOGS application; University of Hawai'i at Manoa. National Science Foundation Award # 1756517''. https://hahana.soest.hawaii.edu/hot/hot-dogs/",
@@ -1410,8 +1382,8 @@
         "sbact/.zattrs": {
             "_ARRAY_DIMENSIONS": [
                 "time",
-                "lat",
-                "lon",
+                "latitude",
+                "longitude",
                 "depth"
             ],
             "acknowledgement": "''Data obtained via the Hawaii Ocean Time-series HOT-DOGS application; University of Hawai'i at Manoa. National Science Foundation Award # 1756517''. https://hahana.soest.hawaii.edu/hot/hot-dogs/",
@@ -1452,6 +1424,34 @@
             "variable_std": 1212.6668131085,
             "visualize": 1.0
         },
+        "sieve_size/.zarray": {
+            "chunks": [
+                5
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<f8",
+            "fill_value": "NaN",
+            "filters": null,
+            "order": "C",
+            "shape": [
+                5
+            ],
+            "zarr_format": 2
+        },
+        "sieve_size/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "sieve_size"
+            ],
+            "long_name": "fraction",
+            "standard_name": "fraction",
+            "units": "mm"
+        },
         "sigma/.zarray": {
             "chunks": [
                 334,
@@ -1481,8 +1481,8 @@
         "sigma/.zattrs": {
             "_ARRAY_DIMENSIONS": [
                 "time",
-                "lat",
-                "lon",
+                "latitude",
+                "longitude",
                 "depth"
             ],
             "acknowledgement": "''Data obtained via the Hawaii Ocean Time-series HOT-DOGS application; University of Hawai'i at Manoa. National Science Foundation Award # 1756517''. https://hahana.soest.hawaii.edu/hot/hot-dogs/",
@@ -1557,10 +1557,10 @@
             "_ARRAY_DIMENSIONS": [
                 "time",
                 "is_day",
-                "lat",
-                "lon",
+                "latitude",
+                "longitude",
                 "depth",
-                "frac"
+                "sieve_size"
             ],
             "acknowledgement": "''Data obtained via the Hawaii Ocean Time-series HOT-DOGS application; University of Hawai'i at Manoa. National Science Foundation Award # 1756517''. https://hahana.soest.hawaii.edu/hot/hot-dogs/",
             "comment": NaN,
@@ -1629,8 +1629,8 @@
         "temp/.zattrs": {
             "_ARRAY_DIMENSIONS": [
                 "time",
-                "lat",
-                "lon",
+                "latitude",
+                "longitude",
                 "depth"
             ],
             "acknowledgement": "''Data obtained via the Hawaii Ocean Time-series HOT-DOGS application; University of Hawai'i at Manoa. National Science Foundation Award # 1756517''. https://hahana.soest.hawaii.edu/hot/hot-dogs/",
@@ -1700,8 +1700,8 @@
         "theta/.zattrs": {
             "_ARRAY_DIMENSIONS": [
                 "time",
-                "lat",
-                "lon",
+                "latitude",
+                "longitude",
                 "depth"
             ],
             "acknowledgement": "''Data obtained via the Hawaii Ocean Time-series HOT-DOGS application; University of Hawai'i at Manoa. National Science Foundation Award # 1756517''. https://hahana.soest.hawaii.edu/hot/hot-dogs/",
@@ -1806,10 +1806,10 @@
             "_ARRAY_DIMENSIONS": [
                 "time",
                 "is_day",
-                "lat",
-                "lon",
+                "latitude",
+                "longitude",
                 "depth",
-                "frac"
+                "sieve_size"
             ],
             "acknowledgement": "''Data obtained via the Hawaii Ocean Time-series HOT-DOGS application; University of Hawai'i at Manoa. National Science Foundation Award # 1756517''. https://hahana.soest.hawaii.edu/hot/hot-dogs/",
             "comment": NaN,
@@ -1883,10 +1883,10 @@
             "_ARRAY_DIMENSIONS": [
                 "time",
                 "is_day",
-                "lat",
-                "lon",
+                "latitude",
+                "longitude",
                 "depth",
-                "frac"
+                "sieve_size"
             ],
             "acknowledgement": "''Data obtained via the Hawaii Ocean Time-series HOT-DOGS application; University of Hawai'i at Manoa. National Science Foundation Award # 1756517''. https://hahana.soest.hawaii.edu/hot/hot-dogs/",
             "comment": NaN,
@@ -1955,8 +1955,8 @@
         "xmiss/.zattrs": {
             "_ARRAY_DIMENSIONS": [
                 "time",
-                "lat",
-                "lon",
+                "latitude",
+                "longitude",
                 "depth"
             ],
             "acknowledgement": "''Data obtained via the Hawaii Ocean Time-series HOT-DOGS application; University of Hawai'i at Manoa. National Science Foundation Award # 1756517''. https://hahana.soest.hawaii.edu/hot/hot-dogs/",

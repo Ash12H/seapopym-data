@@ -1,6 +1,6 @@
 {
     "_ARRAY_DIMENSIONS": [
-        "lon"
+        "longitude"
     ],
     "axis": "X",
     "long_name": "longitude",
