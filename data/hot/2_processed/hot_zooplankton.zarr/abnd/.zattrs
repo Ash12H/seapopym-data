@@ -34,7 +34,7 @@
     "temporal_resolution": "Irregular",
     "time_max": "2022-09-02T22:13:00.000Z",
     "time_min": "1994-02-17T11:08:00.000Z",
-    "units": "#/m2",
+    "units": "#/m3",
     "variable_25th": 515.25,
     "variable_50th": 3940.5,
     "variable_75th": 17627.5,

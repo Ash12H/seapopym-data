@@ -2,10 +2,10 @@
     "_ARRAY_DIMENSIONS": [
         "time",
         "is_day",
-        "latitude",
-        "longitude",
+        "lat",
+        "lon",
         "depth",
-        "sieve_size"
+        "frac"
     ],
     "acknowledgement": "''Data obtained via the Hawaii Ocean Time-series HOT-DOGS application; University of Hawai'i at Manoa. National Science Foundation Award # 1756517''. https://hahana.soest.hawaii.edu/hot/hot-dogs/",
     "comment": NaN,
@@ -34,7 +34,7 @@
     "temporal_resolution": "Irregular",
     "time_max": "2022-09-02T22:13:00.000Z",
     "time_min": "1994-02-17T11:08:00.000Z",
-    "units": "g/m2",
+    "units": "g/m3",
     "variable_25th": 0.92145,
     "variable_50th": 1.5543,
     "variable_75th": 2.567225,
