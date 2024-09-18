@@ -455,44 +455,6 @@
             "long_name": "time",
             "standard_name": "time",
             "units": "days since 1997-02-21 00:00:00"
-        },
-        "total_non_gelatinous/.zarray": {
-            "chunks": [
-                69,
-                2,
-                1,
-                1,
-                4
-            ],
-            "compressor": {
-                "blocksize": 0,
-                "clevel": 5,
-                "cname": "lz4",
-                "id": "blosc",
-                "shuffle": 1
-            },
-            "dtype": "<f8",
-            "fill_value": "NaN",
-            "filters": null,
-            "order": "C",
-            "shape": [
-                69,
-                2,
-                1,
-                1,
-                4
-            ],
-            "zarr_format": 2
-        },
-        "total_non_gelatinous/.zattrs": {
-            "_ARRAY_DIMENSIONS": [
-                "time",
-                "is_day",
-                "latitude",
-                "longitude",
-                "depth"
-            ],
-            "units": "mg/m3"
         }
     },
     "zarr_consolidated_format": 1
