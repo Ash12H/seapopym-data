@@ -1,0 +1,12 @@
+{
+    "_ARRAY_DIMENSIONS": [
+        "time",
+        "is_day",
+        "latitude",
+        "longitude",
+        "depth"
+    ],
+    "long_name": "net mesh size",
+    "standard_name": "mesh_size",
+    "units": "um"
+}

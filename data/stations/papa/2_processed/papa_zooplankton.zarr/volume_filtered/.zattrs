@@ -1,0 +1,12 @@
+{
+    "_ARRAY_DIMENSIONS": [
+        "time",
+        "is_day",
+        "latitude",
+        "longitude",
+        "depth"
+    ],
+    "long_name": "filtered volume of water",
+    "standard_name": "volume",
+    "units": "m3"
+}

@@ -1,0 +1,557 @@
+{
+    "metadata": {
+        ".zattrs": {},
+        ".zgroup": {
+            "zarr_format": 2
+        },
+        "benthos/.zarray": {
+            "chunks": [
+                312,
+                1,
+                6,
+                16,
+                4
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<f8",
+            "fill_value": "NaN",
+            "filters": null,
+            "order": "C",
+            "shape": [
+                623,
+                2,
+                12,
+                31,
+                8
+            ],
+            "zarr_format": 2
+        },
+        "benthos/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "time",
+                "is_day",
+                "latitude",
+                "longitude",
+                "depth"
+            ],
+            "long_name": "dry weight of benthos zooplankton",
+            "standard_name": "benthos",
+            "units": "mg/m3"
+        },
+        "chaetognatha/.zarray": {
+            "chunks": [
+                312,
+                1,
+                6,
+                16,
+                4
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<f8",
+            "fill_value": "NaN",
+            "filters": null,
+            "order": "C",
+            "shape": [
+                623,
+                2,
+                12,
+                31,
+                8
+            ],
+            "zarr_format": 2
+        },
+        "chaetognatha/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "time",
+                "is_day",
+                "latitude",
+                "longitude",
+                "depth"
+            ],
+            "long_name": "dry weight of chaetognatha zooplankton",
+            "standard_name": "chaetognatha",
+            "units": "mg/m3"
+        },
+        "crustacean/.zarray": {
+            "chunks": [
+                312,
+                1,
+                6,
+                16,
+                4
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<f8",
+            "fill_value": "NaN",
+            "filters": null,
+            "order": "C",
+            "shape": [
+                623,
+                2,
+                12,
+                31,
+                8
+            ],
+            "zarr_format": 2
+        },
+        "crustacean/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "time",
+                "is_day",
+                "latitude",
+                "longitude",
+                "depth"
+            ],
+            "long_name": "dry weight of crustacean zooplankton",
+            "standard_name": "crustacean",
+            "units": "mg/m3"
+        },
+        "depth/.zarray": {
+            "chunks": [
+                8
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<i8",
+            "fill_value": null,
+            "filters": null,
+            "order": "C",
+            "shape": [
+                8
+            ],
+            "zarr_format": 2
+        },
+        "depth/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "depth"
+            ],
+            "axis": "Z",
+            "long_name": "depth",
+            "standard_name": "depth",
+            "units": "m"
+        },
+        "is_day/.zarray": {
+            "chunks": [
+                2
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "|i1",
+            "fill_value": null,
+            "filters": null,
+            "order": "C",
+            "shape": [
+                2
+            ],
+            "zarr_format": 2
+        },
+        "is_day/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "is_day"
+            ],
+            "description": "Flag to indicate if the time is during the day or night",
+            "dtype": "bool",
+            "flag_meanings": "day night",
+            "flag_values": "[True, False]",
+            "long_name": "Is day",
+            "standard_name": "is_day"
+        },
+        "larvacean/.zarray": {
+            "chunks": [
+                312,
+                1,
+                6,
+                16,
+                4
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<f8",
+            "fill_value": "NaN",
+            "filters": null,
+            "order": "C",
+            "shape": [
+                623,
+                2,
+                12,
+                31,
+                8
+            ],
+            "zarr_format": 2
+        },
+        "larvacean/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "time",
+                "is_day",
+                "latitude",
+                "longitude",
+                "depth"
+            ],
+            "long_name": "dry weight of larvacean zooplankton",
+            "standard_name": "larvacean",
+            "units": "mg/m3"
+        },
+        "latitude/.zarray": {
+            "chunks": [
+                12
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<f8",
+            "fill_value": "NaN",
+            "filters": null,
+            "order": "C",
+            "shape": [
+                12
+            ],
+            "zarr_format": 2
+        },
+        "latitude/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "latitude"
+            ],
+            "axis": "Y",
+            "long_name": "latitude",
+            "standard_name": "latitude",
+            "units": "degrees_north"
+        },
+        "longitude/.zarray": {
+            "chunks": [
+                31
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<f8",
+            "fill_value": "NaN",
+            "filters": null,
+            "order": "C",
+            "shape": [
+                31
+            ],
+            "zarr_format": 2
+        },
+        "longitude/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "longitude"
+            ],
+            "axis": "X",
+            "long_name": "longitude",
+            "standard_name": "longitude",
+            "units": "degrees_east"
+        },
+        "mesh_size/.zarray": {
+            "chunks": [
+                312,
+                1,
+                6,
+                16,
+                4
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<f8",
+            "fill_value": "NaN",
+            "filters": null,
+            "order": "C",
+            "shape": [
+                623,
+                2,
+                12,
+                31,
+                8
+            ],
+            "zarr_format": 2
+        },
+        "mesh_size/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "time",
+                "is_day",
+                "latitude",
+                "longitude",
+                "depth"
+            ],
+            "long_name": "net mesh size",
+            "standard_name": "mesh_size",
+            "units": "um"
+        },
+        "others/.zarray": {
+            "chunks": [
+                312,
+                1,
+                6,
+                16,
+                4
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<f8",
+            "fill_value": "NaN",
+            "filters": null,
+            "order": "C",
+            "shape": [
+                623,
+                2,
+                12,
+                31,
+                8
+            ],
+            "zarr_format": 2
+        },
+        "others/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "time",
+                "is_day",
+                "latitude",
+                "longitude",
+                "depth"
+            ],
+            "long_name": "dry weight of others zooplankton",
+            "standard_name": "others",
+            "units": "mg/m3"
+        },
+        "small_gelatinous/.zarray": {
+            "chunks": [
+                312,
+                1,
+                6,
+                16,
+                4
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<f8",
+            "fill_value": "NaN",
+            "filters": null,
+            "order": "C",
+            "shape": [
+                623,
+                2,
+                12,
+                31,
+                8
+            ],
+            "zarr_format": 2
+        },
+        "small_gelatinous/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "time",
+                "is_day",
+                "latitude",
+                "longitude",
+                "depth"
+            ],
+            "long_name": "dry weight of small_gelatinous zooplankton",
+            "standard_name": "small_gelatinous",
+            "units": "mg/m3"
+        },
+        "thaliacea/.zarray": {
+            "chunks": [
+                312,
+                1,
+                6,
+                16,
+                4
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<f8",
+            "fill_value": "NaN",
+            "filters": null,
+            "order": "C",
+            "shape": [
+                623,
+                2,
+                12,
+                31,
+                8
+            ],
+            "zarr_format": 2
+        },
+        "thaliacea/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "time",
+                "is_day",
+                "latitude",
+                "longitude",
+                "depth"
+            ],
+            "long_name": "dry weight of thaliacea zooplankton",
+            "standard_name": "thaliacea",
+            "units": "mg/m3"
+        },
+        "time/.zarray": {
+            "chunks": [
+                623
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<i8",
+            "fill_value": null,
+            "filters": null,
+            "order": "C",
+            "shape": [
+                623
+            ],
+            "zarr_format": 2
+        },
+        "time/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "time"
+            ],
+            "axis": "T",
+            "calendar": "proleptic_gregorian",
+            "long_name": "time",
+            "standard_name": "time",
+            "units": "days since 1995-09-24 00:00:00"
+        },
+        "total/.zarray": {
+            "chunks": [
+                312,
+                1,
+                6,
+                16,
+                4
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<f8",
+            "fill_value": "NaN",
+            "filters": null,
+            "order": "C",
+            "shape": [
+                623,
+                2,
+                12,
+                31,
+                8
+            ],
+            "zarr_format": 2
+        },
+        "total/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "time",
+                "is_day",
+                "latitude",
+                "longitude",
+                "depth"
+            ],
+            "long_name": "dry weight of total zooplankton",
+            "standard_name": "total",
+            "units": "mg/m3"
+        },
+        "volume_filtered/.zarray": {
+            "chunks": [
+                312,
+                1,
+                6,
+                16,
+                4
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<f8",
+            "fill_value": "NaN",
+            "filters": null,
+            "order": "C",
+            "shape": [
+                623,
+                2,
+                12,
+                31,
+                8
+            ],
+            "zarr_format": 2
+        },
+        "volume_filtered/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "time",
+                "is_day",
+                "latitude",
+                "longitude",
+                "depth"
+            ],
+            "long_name": "filtered volume of water",
+            "standard_name": "volume",
+            "units": "m3"
+        }
+    },
+    "zarr_consolidated_format": 1
+}
