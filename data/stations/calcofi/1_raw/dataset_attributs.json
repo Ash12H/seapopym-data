@@ -1,0 +1,131 @@
+{
+    "cruise": {
+        "description": "Six-digit cruise code (YYYYMM)",
+        "ioos_category": "Identifier",
+        "long_name": "Cruise"
+    },
+    "ship": {
+        "description": "Ship name",
+        "ioos_category": "Identifier",
+        "long_name": "Ship Name"
+    },
+    "ship_code": {
+        "description": "Two-digit CalCOFI ship code",
+        "ioos_category": "Identifier",
+        "long_name": "Ship Code"
+    },
+    "order_occupied": {
+        "actual_range": [1, 915],
+        "description": "Ordinal number in which the station was sampled for the cruise and ship",
+        "ioos_category": "Identifier",
+        "long_name": "Order Occupied"
+    },
+    "tow_type": {
+        "description": "Net gear type. See the CalCOFI Tow Types table.",
+        "ioos_category": "Identifier",
+        "long_name": "Tow Type"
+    },
+    "tow_number": {
+        "actual_range": [1, 3],
+        "description": "Replicate tow number for the station, net type, and location",
+        "ioos_category": "Identifier",
+        "long_name": "Tow Number"
+    },
+    "net_location": {
+        "description": "Port or Starboard location of net for paired tow types (e.g., bongo or pairovet)",
+        "ioos_category": "Identifier",
+        "long_name": "Net Location (side)"
+    },
+    "time": {
+        "_CoordinateAxisType": "Time",
+        "actual_range": [-5.9885904e8, 1.6746723e9],
+        "axis": "T",
+        "description": "Tow start time (yyyy-MM-dd'T'HH:mm:ss'Z')",
+        "ioos_category": "Time",
+        "long_name": "Time",
+        "standard_name": "time",
+        "time_origin": "01-JAN-1970 00:00:00",
+        "units": "seconds since 1970-01-01T00:00:00Z"
+    },
+    "latitude": {
+        "_CoordinateAxisType": "Lat",
+        "actual_range": [0.001666, 54.28667],
+        "axis": "Y",
+        "description": "Latitude of Station",
+        "ioos_category": "Location",
+        "long_name": "Latitude",
+        "standard_name": "latitude",
+        "units": "degrees_north"
+    },
+    "longitude": {
+        "_CoordinateAxisType": "Lon",
+        "actual_range": [-179.8217, -77.68667],
+        "axis": "X",
+        "description": "Longitude of Station",
+        "ioos_category": "Location",
+        "long_name": "Longitude",
+        "standard_name": "longitude",
+        "units": "degrees_east"
+    },
+    "line": {
+        "actual_range": [-29.5, 394.9],
+        "description": "Nominal CalCOFI Line",
+        "ioos_category": "Location",
+        "long_name": "CalCOFI Line"
+    },
+    "station": {
+        "actual_range": [-280.8, 718.8],
+        "description": "Nominal CalCOFI Station",
+        "ioos_category": "Location",
+        "long_name": "CalCOFI Station"
+    },
+    "volume_sampled": {
+        "actual_range": [5.9, 3360.1],
+        "description": "Volume of water sampled by the net",
+        "ioos_category": "Other",
+        "long_name": "Volume Sampled",
+        "units": "meters^3"
+    },
+    "small_plankton": {
+        "actual_range": [1.0, 25137.0],
+        "description": "Standardized volume of plankton with individual displacement volumes <5 ml",
+        "ioos_category": "Zooplankton Abundance",
+        "long_name": "Small Plankton Volume",
+        "units": "ml/1,000 m^3 of water sampled"
+    },
+    "total_plankton": {
+        "actual_range": [1.0, 114689.0],
+        "description": "Standardized volume of plankton in the sample",
+        "ioos_category": "Zooplankton Abundance",
+        "long_name": "Total Plankton Volume",
+        "units": "ml/1,000 m^3 of water sampled"
+    },
+    "NC_GLOBAL": {
+        "cdm_data_type": "Other",
+        "Conventions": "COARDS, CF-1.6, ACDD-1.3, NCCSV-1.1",
+        "defaultGraphQuery": "longitude,latitude,total_plankton&cruise=\"202301\"&total_plankton>=0",
+        "Easternmost_Easting": -77.68667,
+        "geospatial_lat_max": 54.28667,
+        "geospatial_lat_min": 0.001666,
+        "geospatial_lat_units": "degrees_north",
+        "geospatial_lon_max": -77.68667,
+        "geospatial_lon_min": -179.8217,
+        "geospatial_lon_units": "degrees_east",
+        "history": "2025-03-26T14:22:02Z (local files) 2025-03-26T14:22:02Z https://oceanview.pfeg.noaa.gov/erddap/tabledap/erdCalCOFIzoovol.html",
+        "infoUrl": "https://oceanview.pfeg.noaa.gov/CalCOFI/calcofi_info.html",
+        "institution": "NOAA SWFSC",
+        "license": "The data may be used and redistributed for free but is not intended for legal use, since it may contain inaccuracies. Neither the data Contributor, ERD, NOAA, nor the United States Government, nor any of their employees or contractors, makes any warranty, express or implied, including warranties of merchantability and fitness for a particular purpose, or assumes any legal liability for the accuracy, completeness, or usefulness, of this information.",
+        "Northernmost_Northing": 54.28667,
+        "publisher_email": "ed.weber@noaa.gov",
+        "publisher_name": "Ed Weber",
+        "sourceUrl": "(local files)",
+        "Southernmost_Northing": 0.001666,
+        "standard_name_vocabulary": "CF-12",
+        "subsetVariables": "cruise, station, line, tow_type,net_location, tow_number",
+        "summary": "Standardized volumes (ml/1,000 m^3 of water sampled) of zooplankton captured in CalCOFI net tows. Small plankton are those with individual displacement volumes <5 ml. Total plankton is the standardized volume of all zooplankton in the sample. Voluming methods are described by are described by Kramer et al. (1972) and Smith and Richardson (1977, see the info url references section).",
+        "time_coverage_end": "2023-01-25T18:45:00Z",
+        "time_coverage_start": "1951-01-09T18:16:00Z",
+        "title": "CalCOFI NOAA Zooplankton Volume",
+        "Westernmost_Easting": -179.8217
+    }
+}
