@@ -1,0 +1,13 @@
+{
+    "_ARRAY_DIMENSIONS": [
+        "time",
+        "is_day",
+        "latitude",
+        "longitude"
+    ],
+    "description": "Zooplankton carbon biomass calculated from displacement volume using the formula from Bertha E. Lavaniegos et al 2007. Outliers were removed using the IQR method.",
+    "formula": "log10(C) = 0.6664 * log10(DV) + 1.9997",
+    "long_name": "Zooplankton carbon biomass",
+    "source": "https://calcofi.org/data/marine-ecosystem-data/zooplankton/",
+    "units": "mg/m2"
+}

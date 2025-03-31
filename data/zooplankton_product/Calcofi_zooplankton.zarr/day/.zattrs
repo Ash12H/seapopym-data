@@ -1,0 +1,9 @@
+{
+    "_ARRAY_DIMENSIONS": [
+        "time",
+        "latitude",
+        "longitude"
+    ],
+    "description": "Zooplankton carbon weight by square meter of sea water at day",
+    "units": "mg/m2"
+}
