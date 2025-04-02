@@ -33,6 +33,7 @@ astral = "^3.2"
 cartopy = "^0.24.1"
 geoviews = "^1.14.0"
 scikit-learn = "^1.6.1"
+jupyter-bokeh = "^4.0.5"
 
 
 [build-system]

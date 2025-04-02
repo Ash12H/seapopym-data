@@ -109,7 +109,7 @@
             "filters": null,
             "order": "C",
             "shape": [
-                7628
+                7796
             ],
             "zarr_format": 2
         },
@@ -121,12 +121,12 @@
             "calendar": "proleptic_gregorian",
             "long_name": "time",
             "standard_name": "time",
-            "units": "days since 1951-01-09"
+            "units": "days since 1951-01-09 00:00:00"
         },
         "zooplankton/.zarray": {
             "chunks": [
-                954,
                 1,
+                975,
                 14,
                 26
             ],
@@ -142,8 +142,8 @@
             "filters": null,
             "order": "C",
             "shape": [
-                7628,
                 2,
+                7796,
                 55,
                 103
             ],
@@ -151,12 +151,12 @@
         },
         "zooplankton/.zattrs": {
             "_ARRAY_DIMENSIONS": [
-                "time",
                 "is_day",
+                "time",
                 "latitude",
                 "longitude"
             ],
-            "description": "Zooplankton carbon biomass calculated from displacement volume using the formula from Bertha E. Lavaniegos et al 2007. Outliers were removed using the IQR method.",
+            "description": "Zooplankton carbon biomass calculated from displacement volume using the formula from Bertha E. Lavaniegos et al 2007. The convertion to m2 is DV * (210m3 / 1000m3).",
             "formula": "log10(C) = 0.6664 * log10(DV) + 1.9997",
             "long_name": "Zooplankton carbon biomass",
             "source": "https://calcofi.org/data/marine-ecosystem-data/zooplankton/",
