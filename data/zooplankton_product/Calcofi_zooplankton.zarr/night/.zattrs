@@ -5,5 +5,5 @@
         "longitude"
     ],
     "description": "Zooplankton carbon weight by square meter of sea water at night",
-    "units": "mg/m2"
+    "units": "mg/m3"
 }

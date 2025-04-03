@@ -156,11 +156,11 @@
                 "latitude",
                 "longitude"
             ],
-            "description": "Zooplankton carbon biomass calculated from displacement volume using the formula from Bertha E. Lavaniegos et al 2007. The convertion to m2 is DV * (210m3 / 1000m3).",
+            "description": "Zooplankton carbon biomass calculated from displacement volume using the formula from Bertha E. Lavaniegos et al 2007. The DV was converted to m2 using 140 and 210 m depths for before and after 1968 respectively (cf. paper).",
             "formula": "log10(C) = 0.6664 * log10(DV) + 1.9997",
             "long_name": "Zooplankton carbon biomass",
             "source": "https://calcofi.org/data/marine-ecosystem-data/zooplankton/",
-            "units": "mg/m2"
+            "units": "mg/m3"
         }
     },
     "zarr_consolidated_format": 1

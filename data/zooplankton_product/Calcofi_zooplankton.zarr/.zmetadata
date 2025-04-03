@@ -6,7 +6,7 @@
         },
         "day/.zarray": {
             "chunks": [
-                954,
+                975,
                 14,
                 26
             ],
@@ -22,7 +22,7 @@
             "filters": null,
             "order": "C",
             "shape": [
-                7628,
+                7796,
                 55,
                 103
             ],
@@ -35,7 +35,7 @@
                 "longitude"
             ],
             "description": "Zooplankton carbon weight by square meter of sea water at day",
-            "units": "mg/m2"
+            "units": "mg/m3"
         },
         "latitude/.zarray": {
             "chunks": [
@@ -97,7 +97,7 @@
         },
         "night/.zarray": {
             "chunks": [
-                954,
+                975,
                 14,
                 26
             ],
@@ -113,7 +113,7 @@
             "filters": null,
             "order": "C",
             "shape": [
-                7628,
+                7796,
                 55,
                 103
             ],
@@ -126,7 +126,7 @@
                 "longitude"
             ],
             "description": "Zooplankton carbon weight by square meter of sea water at night",
-            "units": "mg/m2"
+            "units": "mg/m3"
         },
         "time/.zarray": {
             "chunks": [
@@ -144,7 +144,7 @@
             "filters": null,
             "order": "C",
             "shape": [
-                7628
+                7796
             ],
             "zarr_format": 2
         },
