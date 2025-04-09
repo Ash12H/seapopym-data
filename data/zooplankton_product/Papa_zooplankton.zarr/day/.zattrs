@@ -2,7 +2,8 @@
     "_ARRAY_DIMENSIONS": [
         "time",
         "latitude",
-        "longitude"
+        "longitude",
+        "layer"
     ],
     "description": "Zooplankton dry weight by cube meter of sea water at day",
     "units": "mg/m3"

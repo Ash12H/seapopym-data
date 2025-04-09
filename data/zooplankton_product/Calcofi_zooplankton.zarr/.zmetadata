@@ -6,6 +6,7 @@
         },
         "day/.zarray": {
             "chunks": [
+                1,
                 975,
                 14,
                 26
@@ -24,7 +25,8 @@
             "shape": [
                 7796,
                 55,
-                103
+                103,
+                1
             ],
             "zarr_format": 2
         },
@@ -32,7 +34,8 @@
             "_ARRAY_DIMENSIONS": [
                 "time",
                 "latitude",
-                "longitude"
+                "longitude",
+                "layer"
             ],
             "description": "Zooplankton carbon weight by square meter of sea water at day",
             "units": "mg/m3"
@@ -66,6 +69,41 @@
             "standard_name": "latitude",
             "units": "degrees_north"
         },
+        "layer/.zarray": {
+            "chunks": [
+                1
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<i8",
+            "fill_value": null,
+            "filters": null,
+            "order": "C",
+            "shape": [
+                1
+            ],
+            "zarr_format": 2
+        },
+        "layer/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "layer"
+            ],
+            "axis": "Z",
+            "desc": "The layer depth according to Seapodym definition",
+            "flag_meanings": "epipelagic, upper-mesopelagic, lower-mesopelagic",
+            "flag_values": [
+                0,
+                1,
+                2
+            ],
+            "long_name": "Layer depth",
+            "standard_name": "layer"
+        },
         "longitude/.zarray": {
             "chunks": [
                 103
@@ -97,6 +135,7 @@
         },
         "night/.zarray": {
             "chunks": [
+                1,
                 975,
                 14,
                 26
@@ -115,7 +154,8 @@
             "shape": [
                 7796,
                 55,
-                103
+                103,
+                1
             ],
             "zarr_format": 2
         },
@@ -123,7 +163,8 @@
             "_ARRAY_DIMENSIONS": [
                 "time",
                 "latitude",
-                "longitude"
+                "longitude",
+                "layer"
             ],
             "description": "Zooplankton carbon weight by square meter of sea water at night",
             "units": "mg/m3"
