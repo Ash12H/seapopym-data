@@ -1,4 +1,8 @@
 .venv
+.vscode
 .DS_Store
 .secrets
+
 test
+src/**/*.nc
+src/**/*.zarr

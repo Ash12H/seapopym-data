@@ -1,0 +1,207 @@
+{
+    "metadata": {
+        ".zattrs": {
+            "creation date": "2025-07-09T13:29:28.222363",
+            "station": "CALCOFI"
+        },
+        ".zgroup": {
+            "zarr_format": 2
+        },
+        "day/.zarray": {
+            "chunks": [
+                7796,
+                10,
+                10,
+                1
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<f4",
+            "fill_value": "NaN",
+            "filters": null,
+            "order": "C",
+            "shape": [
+                7796,
+                55,
+                103,
+                1
+            ],
+            "zarr_format": 2
+        },
+        "day/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "time",
+                "latitude",
+                "longitude",
+                "layer"
+            ],
+            "description": "Zooplankton carbon weight by square meter of sea water at day",
+            "units": "mg/m3"
+        },
+        "latitude/.zarray": {
+            "chunks": [
+                55
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<f8",
+            "fill_value": "NaN",
+            "filters": null,
+            "order": "C",
+            "shape": [
+                55
+            ],
+            "zarr_format": 2
+        },
+        "latitude/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "latitude"
+            ],
+            "axis": "Y",
+            "long_name": "latitude",
+            "standard_name": "latitude",
+            "units": "degrees_north"
+        },
+        "layer/.zarray": {
+            "chunks": [
+                1
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<i8",
+            "fill_value": null,
+            "filters": null,
+            "order": "C",
+            "shape": [
+                1
+            ],
+            "zarr_format": 2
+        },
+        "layer/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "layer"
+            ],
+            "axis": "Z",
+            "desc": "The layer depth according to Seapodym definition",
+            "flag_meanings": "epipelagic, upper-mesopelagic, lower-mesopelagic",
+            "flag_values": [
+                0,
+                1,
+                2
+            ],
+            "long_name": "Layer depth",
+            "standard_name": "layer"
+        },
+        "longitude/.zarray": {
+            "chunks": [
+                103
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<f8",
+            "fill_value": "NaN",
+            "filters": null,
+            "order": "C",
+            "shape": [
+                103
+            ],
+            "zarr_format": 2
+        },
+        "longitude/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "longitude"
+            ],
+            "axis": "X",
+            "long_name": "longitude",
+            "standard_name": "longitude",
+            "units": "degrees_east"
+        },
+        "night/.zarray": {
+            "chunks": [
+                7796,
+                10,
+                10,
+                1
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<f4",
+            "fill_value": "NaN",
+            "filters": null,
+            "order": "C",
+            "shape": [
+                7796,
+                55,
+                103,
+                1
+            ],
+            "zarr_format": 2
+        },
+        "night/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "time",
+                "latitude",
+                "longitude",
+                "layer"
+            ],
+            "description": "Zooplankton carbon weight by square meter of sea water at night",
+            "units": "mg/m3"
+        },
+        "time/.zarray": {
+            "chunks": [
+                7796
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<i8",
+            "fill_value": null,
+            "filters": null,
+            "order": "C",
+            "shape": [
+                7796
+            ],
+            "zarr_format": 2
+        },
+        "time/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "time"
+            ],
+            "axis": "T",
+            "calendar": "proleptic_gregorian",
+            "long_name": "time",
+            "standard_name": "time",
+            "units": "days since 1951-01-09"
+        }
+    },
+    "zarr_consolidated_format": 1
+}

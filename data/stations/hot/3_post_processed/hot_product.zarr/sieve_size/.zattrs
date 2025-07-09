@@ -1,8 +1,0 @@
-{
-    "_ARRAY_DIMENSIONS": [
-        "sieve_size"
-    ],
-    "long_name": "fraction",
-    "standard_name": "fraction",
-    "units": "mm"
-}
