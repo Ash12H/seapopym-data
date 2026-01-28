@@ -1,15 +1,23 @@
 # BATS Station Report
 
-**Date**: 2026-01-28 14:27:08.333056
-**Input**: `bats_zooplankton.csv`
-**Output**: `bats_zooplankton_obs.nc`
+**Date**: 2026-01-28 16:34:51
+**Location**: 31.6°N, -64.2°W
 
-## 1. Data Quality
-![Missing Values](figures/missing_values.png)
+## Summary
 
-## 2. Geography
+- Initial rows: 6,728
+- Final rows: 663
+- Period: 1995-05-10 to 2022-12-13
+
+### Exclusions
+
+- Depth <50m: 5 rows
+- Sieve 5000µm: 1341 rows
+- Missing sieve: 22 rows
+
+## Figures
+
 ![Map](figures/map.png)
 
-## 3. Time Series
 ![Time Series](figures/time_series_biomass.png)
 
