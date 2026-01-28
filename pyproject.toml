@@ -1,41 +1,31 @@
-[tool.poetry]
+[project]
 name = "seapopym-data"
 version = "0.1.0"
-description = "Standardize the observation data used by Seapopym."
-authors = ["Jules Lehodey <juleslehodey31320@hotmail.fr>"]
+description = "Add your description here"
 readme = "README.md"
-package-mode = false
+requires-python = ">=3.12"
+dependencies = [
+    "cf-xarray>=0.10.10",
+    "matplotlib>=3.10.8",
+    "netcdf4>=1.7.4",
+    "pandas>=3.0.0",
+    "pint-xarray>=0.6.0",
+    "pyarrow>=23.0.0",
+    "ruff>=0.14.14",
+    "scipy>=1.17.0",
+    "seaborn>=0.13.2",
+    "xarray>=2025.12.0",
+    "zarr>=3.1.5",
+]
 
-[tool.poetry.dependencies]
-python = "^3.12"
-jupyter = "^1.0.0"
-ipython = "^8.24.0"
-numpy = "^1.26.4"
-pandas = "^2.2.2"
-xarray = "^2024.3.0"
-dask = "^2024.5.0"
-matplotlib = "^3.8.4"
-hvplot = "^0.10.0"
-plotly = "^5.22.0"
-dash = "^2.17.0"
-voila = "^0.5.6"
-zarr = "^2.18.0"
-netcdf4 = "^1.6.5"
-pint-xarray = "^0.3"
-cf-xarray = "^0.9.0"
-scipy = "^1.13.0"
-ruff = "^0.4.6"
-pycmap = "^0.2.19"
-openpyxl = "^3.1.5"
-seaborn = "^0.13.2"
-pyarrow = "^19.0.1"
-astral = "^3.2"
-cartopy = "^0.24.1"
-geoviews = "^1.14.0"
-scikit-learn = "^1.6.1"
-jupyter-bokeh = "^4.0.5"
+[tool.ruff]
+line-length = 88
 
+[tool.ruff.lint]
+extend-select = ["E", "F"]
+ignore = ["E402"] # needed for scripts sys.path
 
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+[dependency-groups]
+dev = [
+    "pytest>=9.0.2",
+]
