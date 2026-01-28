@@ -3,9 +3,9 @@
 ## Informations générales
 
 - **Projet** : seapopym-data
-- **Étape courante** : 9. Finalisation
-- **Rôle actif** : Facilitateur
-- **Dernière mise à jour** : 2026-01-28T14:23:00+01:00
+- **Étape courante** : Terminé
+- **Rôle actif** : -
+- **Dernière mise à jour** : 2026-01-28T14:30:00+01:00
 - **Dernière mise à jour** : 2026-01-28T14:15:00+01:00
 - **Dernière mise à jour** : 2026-01-28T14:02:00+01:00
 - **Dernière mise à jour** : 2026-01-28T13:58:00+01:00
@@ -44,6 +44,32 @@ Le projet est organisé par station dans `src/`. Chaque station (`bats`, `calcof
 2.  **Aplatissement** : Simplification de l'arborescence des données (`data/raw`, `data/processed`).
 3.  **Scripting** : Extraction de la logique des notebooks vers des modules Python réutilisables et des scripts d'exécution.
 4.  **Reporting** : Création d'un module de génération de rapport Markdown + PNG.
+
+## Résumé final
+
+### Ce qui a été réalisé
+
+Refactoring complet du projet pour passer d'une approche "recherche/notebooks" à une approche "ingénierie/pipeline".
+
+1. **Migration technique** : Passage de Poetry à `uv`, suppression des notebooks Jupyter au profit de scripts Python modulaires.
+2. **Nettoyage des données** : Conservation exclusive des données de zooplancton, suppression de 1.2M lines de code/data obsolètes (ancien produits, fichiers CTD/Primary production).
+3. **Architecture** : Structure standardisée `src/{station}/{data, release, reports, scripts}`.
+4. **Core Library** : Création de `src/core` (IO, Plotting, Units) pour éviter la duplication.
+
+### Fichiers impactés
+
+| Action   | Fichier                                                     |
+| -------- | ----------------------------------------------------------- |
+| Créé     | `src/core/*.py` (io, plotting, units)                       |
+| Créé     | `src/*/scripts/process.py` (Scripts de traitement pipeline) |
+| Supprimé | Tous les Notebooks `.ipynb`                                 |
+| Supprimé | Anciens dossiers `1_raw`, `2_processed`...                  |
+| Généré   | `src/*/release/*_obs.nc` (NetCDF légers)                    |
+| Généré   | `src/*/reports/report.md`                                   |
+
+### Actions de sauvegarde effectuées
+
+- [x] git commit -m "refactor: migrate seapopym-data to uv and new architecture"
 
 ## Décisions d'architecture
 
@@ -109,20 +135,20 @@ seapopym-data/
 
 ## Todo List
 
-| État | ID  | Nom                  | Description                                                                                                          | Dépendances      | Résolution                                                                               |
-| ---- | --- | -------------------- | -------------------------------------------------------------------------------------------------------------------- | ---------------- | ---------------------------------------------------------------------------------------- | --- |
-| ☑    | T1  | Clean Environment    | Supprimer `.venv`, `poetry.lock`. Initialiser `uv`. Créer nouveau `pyproject.toml`.                                  | -                | Environnement nettoyé, `uv` initialisé, dépendances installées.                          |
-| ☑    | T2  | Create New Structure | Créer l'arborescence vide `src/core`, et pour chaque station `data/`, `scripts/`, `reports/`, `release/`.            | T1               | Arborescence standardisée créée pour toutes les stations.                                |
-| ☑    | T3  | Migrate Data         | Déplacer les fichiers raw/temp/product vers `data/raw`, `data/temp`, `release`. Supprimer les dossiers `1_raw`, etc. | T2               | Données migrées pour BATS, CALCOFI, HOT, PAPA. Anciens dossiers supprimés.               |
-| ☑    | T4  | Cleanup Non-Zoo      | Supprimer radicalement tous les fichiers non liés au Zooplancton (CTD, Bottle, PP).                                  | T3               | Tous les fichiers contenant 'primary_production', 'bottle', 'ctd' ont été supprimés.     |
-| ☑    | T5  | Implement Core IO    | Créer `src/core/io.py` pour gérer lecture/écriture standardisée.                                                     | T1, T2           | Module IO créé avec DataLoader et DataWriter.                                            |
-| ☑    | T6  | Implement Core Plot  | Créer `src/core/plotting.py` pour générer les figures statiques standards.                                           | T1, T2           | Module Plotting créé avec time_series, missing_values, map.                              |
-| ☑    | T7  | Implement Core Units | Créer `src/core/units.py` pour gérer les conversions d'unités avec Pint.                                             | T1, T2           | Module Units créé avec UnitManager.                                                      |
-| ☑    | T8  | Migrate Bats         | Créer `src/bats/scripts/process.py` en migrant la logique du notebook. Générer rapport.                              | T5, T6, T7       | Script `process.py` fonctionnel. NetCDF et rapport générés.                              |
-| ☑    | T9  | Migrate Calcofi      | Créer `src/calcofi/scripts/process.py` en migrant la logique du script/nb existant.                                  | T5, T6, T7       | Script `process.py` fonctionnel. NetCDF et rapport générés.                              |
-| ☑    | T10 | Migrate Hot          | Créer `src/hot/scripts/process.py` en migrant la logique du notebook.                                                | T5, T6, T7       | Script `process.py` fonctionnel. NetCDF et rapport générés.                              |
-| ☑    | T11 | Migrate Papa         | Créer `src/papa/scripts/process.py` en migrant la logique du notebook.                                               | T5, T6, T7       | Script `process.py` fonctionnel avec options CSV spécifiques. NetCDF et rapport générés. |
-| ☑    | T12 | Verify & Validate    | Vérifier la génération des rapports pour toutes les stations.                                                        | T8, T9, T10, T11 | Vérification effectuée. Tous les fichiers cibles (NetCDF, Reports) sont présents.        |     |
+| État | ID  | Nom                  | Description                                                                                                          | Dépendances      | Résolution                                                                                                                  |
+| ---- | --- | -------------------- | -------------------------------------------------------------------------------------------------------------------- | ---------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| ☑    | T1  | Clean Environment    | Supprimer `.venv`, `poetry.lock`. Initialiser `uv`. Créer nouveau `pyproject.toml`.                                  | -                | Environnement nettoyé, `uv` initialisé, dépendances installées.                                                             |
+| ☑    | T2  | Create New Structure | Créer l'arborescence vide `src/core`, et pour chaque station `data/`, `scripts/`, `reports/`, `release/`.            | T1               | Arborescence standardisée créée pour toutes les stations.                                                                   |
+| ☑    | T3  | Migrate Data         | Déplacer les fichiers raw/temp/product vers `data/raw`, `data/temp`, `release`. Supprimer les dossiers `1_raw`, etc. | T2               | Données migrées pour BATS, CALCOFI, HOT, PAPA. Anciens dossiers supprimés.                                                  |
+| ☑    | T4  | Cleanup Non-Zoo      | Supprimer radicalement tous les fichiers non liés au Zooplancton (CTD, Bottle, PP).                                  | T3               | Tous les fichiers contenant 'primary_production', 'bottle', 'ctd' ont été supprimés.                                        |
+| ☑    | T5  | Implement Core IO    | Créer `src/core/io.py` pour gérer lecture/écriture standardisée.                                                     | T1, T2           | Module IO créé avec DataLoader et DataWriter.                                                                               |
+| ☑    | T6  | Implement Core Plot  | Créer `src/core/plotting.py` pour générer les figures statiques standards.                                           | T1, T2           | Module Plotting créé avec time_series, missing_values, map.                                                                 |
+| ☑    | T7  | Implement Core Units | Créer `src/core/units.py` pour gérer les conversions d'unités avec Pint.                                             | T1, T2           | Module Units créé avec UnitManager.                                                                                         |
+| ☑    | T8  | Migrate Bats         | Créer `src/bats/scripts/process.py` en migrant la logique du notebook. Générer rapport.                              | T5, T6, T7       | Script `process.py` aggrege les 5 fractions par tow et convertit en mg/m3. Validé par analytical_methods.                   |
+| ☑    | T9  | Migrate Calcofi      | Créer `src/calcofi/scripts/process.py` en migrant la logique du script/nb existant.                                  | T5, T6, T7       | Script `process.py` fonctionnel. NetCDF et rapport générés.                                                                 |
+| ☑    | T10 | Migrate Hot          | Créer `src/hot/scripts/process.py` en migrant la logique du notebook.                                                | T5, T6, T7       | Script `process.py` aggrege les 6 fractions par tow et convertit en mg/m3. Validé par analytical_methods.                   |
+| ☑    | T11 | Migrate Papa         | Créer `src/papa/scripts/process.py` en migrant la logique du notebook.                                               | T5, T6, T7       | Script `process.py` identifie les stations récurrentes (>1 obs) et les affiche sur la carte. Pas de biomasse totale simple. |
+| ☑    | T12 | Verify & Validate    | Vérifier la génération des rapports pour toutes les stations.                                                        | T8, T9, T10, T11 | Vérification effectuée. Tous les fichiers cibles (NetCDF, Reports) sont présents.                                           |
 
 ## Rapport de revue
 
@@ -160,3 +186,4 @@ seapopym-data/
 | 6. Revue          | 7. Resolution     | 30 erreurs de linting détectées et nettoyage nécessaire | 2026-01-28 |
 | 7. Resolution     | 8. Test           | Issues résolues, code propre                            | 2026-01-28 |
 | 8. Test           | 9. Finalisation   | Tests Core validés (IO, Units)                          | 2026-01-28 |
+| 9. Finalisation   | Terminé           | Migration terminée et validée                           | 2026-01-28 |

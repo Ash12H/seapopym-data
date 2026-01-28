@@ -65,11 +65,60 @@ class Plotter:
         output_path: Path,
         hue: Optional[str] = None,
     ) -> None:
-        """Plot a simple scatter map (lat vs lon)."""
-        fig, ax = plt.subplots()
-        sns.scatterplot(data=data, x=lon_col, y=lat_col, hue=hue, ax=ax, alpha=0.6)
+        """Plot a scatter map with land and coastline using Cartopy."""
+        try:
+            import cartopy.crs as ccrs
+            import cartopy.feature as cfeature
+        except ImportError:
+            print("Cartopy not installed. Plotting simple scatter.")
+            # Fallback
+            fig, ax = plt.subplots()
+            sns.scatterplot(data=data, x=lon_col, y=lat_col, hue=hue, ax=ax, alpha=0.6)
+            ax.set_title("Station Locations")
+            ax.set_xlabel("Longitude")
+            ax.set_ylabel("Latitude")
+            Plotter.save_figure(fig, output_path)
+            return
+
+        # Setup GeoAxes
+        fig, ax = plt.subplots(
+            figsize=(10, 8), subplot_kw={"projection": ccrs.PlateCarree()}
+        )
+
+        # Add map features
+        ax.add_feature(cfeature.LAND, facecolor="lightgray")
+        ax.add_feature(cfeature.COASTLINE)
+        ax.add_feature(cfeature.BORDERS, linestyle=":")
+        ax.gridlines(draw_labels=True, dms=True, x_inline=False, y_inline=False)
+
+        # Plot data
+        # transform=ccrs.PlateCarree() ensures lat/lon data is plotted correctly
+        # regardless of map projection (though here map is also PlateCarree)
+        sns.scatterplot(
+            data=data,
+            x=lon_col,
+            y=lat_col,
+            hue=hue,
+            ax=ax,
+            alpha=0.7,
+            zorder=10,
+            transform=ccrs.PlateCarree(),
+        )
+
         ax.set_title("Station Locations")
-        ax.set_xlabel("Longitude")
-        ax.set_ylabel("Latitude")
-        ax.axis("equal")  # Approximate simplified aspect ratio
+        # Extend extent slightly to show context
+        if not data.empty:
+            lon_min, lon_max = data[lon_col].min(), data[lon_col].max()
+            lat_min, lat_max = data[lat_col].min(), data[lat_col].max()
+            margin = 2.0  # degrees
+            ax.set_extent(
+                [
+                    lon_min - margin,
+                    lon_max + margin,
+                    lat_min - margin,
+                    lat_max + margin,
+                ],
+                crs=ccrs.PlateCarree(),
+            )
+
         Plotter.save_figure(fig, output_path)

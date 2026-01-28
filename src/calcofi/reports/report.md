@@ -1,6 +1,6 @@
 # CALCOFI Station Report
 
-**Date**: 2026-01-28 13:38:40.653387
+**Date**: 2026-01-28 14:27:09.720273
 **Input**: `zooplankton.parquet`
 **Output**: `calcofi_zooplankton_obs.nc`
 

@@ -1,8 +1,59 @@
-.venv
-.vscode
-.DS_Store
-.secrets
+# Environments
+.env
+.venv/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
 
-test
-src/**/*.nc
-src/**/*.zarr
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Jupyter Notebooks
+.ipynb_checkpoints
+
+# IDE / Editor
+.vscode/
+.idea/
+.DS_Store
+*.swp
+*~
+
+# Testing / Type Checking
+.coverage
+htmlcov/
+.pytest_cache/
+.mypy_cache/
+
+# Project Specific / Data
+.secrets
+test/
+
+# Data files (NetCDF, Zarr, CSVs if large)
+*.nc
+*.zarr
+# Add specific raw data folders if you don't want to track CSVs
+# src/**/1_raw/*
+# src/**/2_processed/*
