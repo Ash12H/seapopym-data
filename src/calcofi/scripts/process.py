@@ -317,23 +317,52 @@ def main():
         print(f"   ⚠ Error generating time series: {e}")
 
     try:
-        # Spatial map of mean biomass
-        fig, ax = plt.subplots(figsize=(10, 8))
+        # Spatial map of mean biomass with cartopy
+        import cartopy.crs as ccrs
+        import cartopy.feature as cfeature
+
         spatial_mean = final.groupby(["lat_bin", "lon_bin"])["biomass_carbon"].mean()
+
+        fig = plt.figure(figsize=(12, 10))
+        ax = plt.axes(projection=ccrs.PlateCarree())
+
+        # Add geographic features
+        ax.add_feature(cfeature.LAND, facecolor='lightgray', edgecolor='black', linewidth=0.5)
+        ax.add_feature(cfeature.COASTLINE, linewidth=0.8)
+        ax.add_feature(cfeature.BORDERS, linestyle=':', linewidth=0.5, alpha=0.5)
+
+        # Plot data
         scatter = ax.scatter(
             spatial_mean.index.get_level_values(1),
             spatial_mean.index.get_level_values(0),
             c=spatial_mean.values,
-            s=50,
+            s=80,
             cmap="YlOrRd",
-            alpha=0.7,
+            alpha=0.8,
+            edgecolors='black',
+            linewidth=0.5,
+            transform=ccrs.PlateCarree(),
+            zorder=5
         )
-        plt.colorbar(scatter, ax=ax, label="Mean Carbon Biomass (mg C/m³)")
-        ax.set_xlabel("Longitude")
-        ax.set_ylabel("Latitude")
-        ax.set_title("CalCOFI Spatial Distribution (mean carbon biomass)")
-        ax.grid(True, alpha=0.3)
-        plt.savefig(FIGURES_DIR / "map.png", dpi=150)
+
+        # Set extent (fixed for CalCOFI region)
+        lat_min, lat_max = spatial_mean.index.get_level_values(0).min(), spatial_mean.index.get_level_values(0).max()
+        margin = 3
+        ax.set_extent([-180, -60,
+                       lat_min - margin, lat_max + margin],
+                      crs=ccrs.PlateCarree())
+
+        # Gridlines
+        gl = ax.gridlines(draw_labels=True, linewidth=0.5, alpha=0.5, linestyle='--')
+        gl.top_labels = False
+        gl.right_labels = False
+
+        plt.colorbar(scatter, ax=ax, label="Mean Carbon Biomass (mg C/m³)", shrink=0.7)
+        ax.set_title("CalCOFI Spatial Distribution (mean carbon biomass)",
+                     fontsize=14, fontweight='bold')
+
+        plt.tight_layout()
+        plt.savefig(FIGURES_DIR / "map.png", dpi=150, bbox_inches='tight')
         plt.close()
         print("   ✓ map.png")
     except Exception as e:
@@ -388,6 +417,59 @@ def main():
         f.write("**Aggregation**:\n")
         f.write("1. Average biomass per tow\n")
         f.write("2. Median of tows per day/depth_category/spatial_cell\n\n")
+
+        f.write("## Points d'attention et biais potentiels\n\n")
+
+        f.write("### 1. Changement de protocole de profondeur (1969)\n\n")
+        f.write("- **Avant 1969** : Profondeur standard 140m\n")
+        f.write("- **Après 1968** : Profondeur standard 210m\n")
+        f.write("- **Impact** : Différence de volume échantillonné et de couverture verticale. ")
+        f.write("Les traits post-1968 intègrent une partie de la zone mésopélagique (150-210m), ")
+        f.write("potentiellement incluant des organismes non capturés avant 1969.\n")
+        f.write("- **Mitigation** : Conversion en concentration volumique (mg/m³) normalise partiellement ")
+        f.write("l'effet, mais la composition taxonomique peut différer.\n\n")
+
+        f.write("### 2. Conversion non-linéaire Lavaniegos & Ohman (2007)\n\n")
+        f.write("- **Formule empirique** : Basée sur des échantillons CalCOFI (1951-2005)\n")
+        f.write("- **Relation log-log** : Amplification des incertitudes pour les faibles et fortes valeurs\n")
+        f.write("- **Limites de validité** : Formule calibrée sur le système California Current, ")
+        f.write("extrapolation à d'autres régions non validée\n")
+        f.write("- **Incertitude** : Pas d'intervalle de confiance publié pour la formule\n\n")
+
+        f.write("### 3. Restriction aux petits organismes (small_plankton)\n\n")
+        f.write("- **Seuil** : Organismes avec volume individuel <5ml\n")
+        f.write("- **Exclus** : Grands organismes gélatineux (méduses, salpes), euphausiacés adultes, ")
+        f.write("larves de poissons de grande taille\n")
+        f.write("- **Justification** : Cohérence avec HOT/BATS (fraction <5mm), capture hétérogène ")
+        f.write("des grands organismes par les filets standards\n")
+        f.write("- **Impact** : Sous-estimation de la biomasse totale, mais meilleure cohérence ")
+        f.write("inter-stations\n\n")
+
+        f.write("### 4. Agrégation spatiale (1° × 1°)\n\n")
+        f.write("- **Résolution** : Grille 1° (~111km à l'équateur)\n")
+        f.write("- **Justification** : Couverture spatiale large (0-54°N, -180 à -78°W), ")
+        f.write("hétérogénéité des stations\n")
+        f.write("- **Impact** : Lissage des variations locales, perte de résolution côtière\n")
+        f.write("- **Cellules** : 965 cellules uniques sur la période 1951-2023\n\n")
+
+        f.write("### 5. Classification jour/nuit\n\n")
+        f.write("- **Méthode** : Calcul astronomique (lever/coucher soleil) via bibliothèque `astral`\n")
+        f.write("- **Avantage** : Précision basée sur position géographique et date réelles\n")
+        f.write("- **Attention** : Gestion des timezones (UTC vs local) et wrap-around jour suivant\n")
+        f.write(f"- **Distribution observée** : {day_count} jour ({day_count/len(df)*100:.1f}%) vs ")
+        f.write(f"{night_count} nuit ({night_count/len(df)*100:.1f}%)\n\n")
+
+        f.write("### 6. Absence d'exclusions par profondeur/maille\n\n")
+        f.write("- **Aucune exclusion** : Contrairement à HOT/BATS (traits <50m exclus), ")
+        f.write("tous les traits CalCOFI sont conservés\n")
+        f.write("- **Raison** : Protocole standardisé CalCOFI (140m/210m), pas de traits aberrants détectés\n")
+        f.write("- **Maille** : Variable selon période (majoritairement 202-333µm)\n\n")
+
+        f.write("### 7. Couverture temporelle et spatiale\n\n")
+        f.write("- **Période** : 1951-2023 (72 ans)\n")
+        f.write("- **Échantillonnage** : Irrégulier dans le temps et l'espace (campagnes opportunistes)\n")
+        f.write("- **Biais géographique** : Concentration des observations près des côtes californiennes\n")
+        f.write("- **Biais saisonnier** : À vérifier (campagnes potentiellement concentrées sur certaines saisons)\n\n")
 
     print(f"   ✓ {REPORT_FILE}")
     print()

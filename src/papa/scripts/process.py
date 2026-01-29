@@ -257,23 +257,52 @@ def main():
         print(f"   ⚠ Error generating time series: {e}")
 
     try:
-        # Spatial map of mean biomass
-        fig, ax = plt.subplots(figsize=(10, 8))
+        # Spatial map of mean biomass with cartopy
+        import cartopy.crs as ccrs
+        import cartopy.feature as cfeature
+
         spatial_mean = final.groupby(["lat_bin", "lon_bin"])["biomass_dry"].mean()
+
+        fig = plt.figure(figsize=(12, 8))
+        ax = plt.axes(projection=ccrs.PlateCarree())
+
+        # Add geographic features
+        ax.add_feature(cfeature.LAND, facecolor='lightgray', edgecolor='black', linewidth=0.5)
+        ax.add_feature(cfeature.COASTLINE, linewidth=0.8)
+        ax.add_feature(cfeature.BORDERS, linestyle=':', linewidth=0.5, alpha=0.5)
+
+        # Plot data
         scatter = ax.scatter(
             spatial_mean.index.get_level_values(1),
             spatial_mean.index.get_level_values(0),
             c=spatial_mean.values,
-            s=50,
+            s=80,
             cmap="YlOrRd",
-            alpha=0.7,
+            alpha=0.8,
+            edgecolors='black',
+            linewidth=0.5,
+            transform=ccrs.PlateCarree(),
+            zorder=5
         )
-        plt.colorbar(scatter, ax=ax, label="Mean Biomass (mg/m³)")
-        ax.set_xlabel("Longitude")
-        ax.set_ylabel("Latitude")
-        ax.set_title("PAPA Spatial Distribution (mean biomass)")
-        ax.grid(True, alpha=0.3)
-        plt.savefig(FIGURES_DIR / "map.png", dpi=150)
+
+        # Set extent (with margin)
+        lon_min, lon_max = spatial_mean.index.get_level_values(1).min(), spatial_mean.index.get_level_values(1).max()
+        lat_min, lat_max = spatial_mean.index.get_level_values(0).min(), spatial_mean.index.get_level_values(0).max()
+        margin = 5
+        ax.set_extent([lon_min - margin, lon_max + margin,
+                       lat_min - margin, lat_max + margin],
+                      crs=ccrs.PlateCarree())
+
+        # Gridlines
+        gl = ax.gridlines(draw_labels=True, linewidth=0.5, alpha=0.5, linestyle='--')
+        gl.top_labels = False
+        gl.right_labels = False
+
+        plt.colorbar(scatter, ax=ax, label="Mean Biomass (mg/m³)", shrink=0.7)
+        ax.set_title("PAPA Spatial Distribution (mean biomass)", fontsize=14, fontweight='bold')
+
+        plt.tight_layout()
+        plt.savefig(FIGURES_DIR / "map.png", dpi=150, bbox_inches='tight')
         plt.close()
         print("   ✓ map.png")
     except Exception as e:
@@ -336,6 +365,75 @@ def main():
         f.write("**Aggregation**:\n")
         f.write("1. Sum of 91 taxa per tow\n")
         f.write("2. Median of tows per day/depth_category/spatial_cell\n\n")
+
+        f.write("## Points d'attention et biais potentiels\n\n")
+
+        f.write("### 1. Hétérogénéité spatiale (multi-stations)\n\n")
+        f.write("- **Type** : 314 stations différentes (vs station fixe pour HOT/BATS)\n")
+        f.write("- **Couverture** : Pacifique Nord-Est (46-58°N, -158 à -128°W)\n")
+        f.write("- **Stations principales** : P26 (110 obs), P12 (71 obs), P08 (69 obs)\n")
+        f.write("- **Impact** : Mélange de conditions océanographiques différentes (côtier vs offshore, ")
+        f.write("fronts, upwelling). Difficulté à distinguer variabilité temporelle vs spatiale.\n")
+        f.write("- **Mitigation** : Agrégation spatiale 0.5° pour réduire l'hétérogénéité locale\n\n")
+
+        f.write("### 2. Variabilité des profondeurs de trait\n\n")
+        depth_stats = df[df['tow_id'].isin(agg1['tow_id'])].groupby('tow_id')['tow_depth_max'].first()
+        f.write(f"- **Profondeur médiane** : {depth_stats.median():.0f}m\n")
+        f.write(f"- **Protocoles standards** : 150m ({(depth_stats == 150).sum()} traits) ")
+        f.write(f"et 250m ({(depth_stats == 250).sum()} traits)\n")
+        f.write(f"- **Variabilité** : 50-295m (écart-type {depth_stats.std():.0f}m)\n")
+        f.write("- **Impact** : Les traits peu profonds (<150m) échantillonnent uniquement ")
+        f.write("l'épipélagique, les traits profonds (>150m) intègrent le mésopélagique. ")
+        f.write("Comparaisons temporelles sensibles aux changements de protocole.\n")
+        f.write("- **Mitigation** : Catégorisation en 2 groupes (≤150m, >150m) pour séparer ")
+        f.write("les profils verticaux\n\n")
+
+        f.write("### 3. Exclusion des polychètes adultes benthiques\n\n")
+        f.write("- **Taxa exclus** : 3 catégories de polychètes adultes (ANNE:POLY s1, s2, s3)\n")
+        f.write("- **Justification** : Organismes benthiques (vivent sur le fond), captures ")
+        f.write("accidentelles lors des traits obliques\n")
+        f.write("- **Conservés** : Larves de polychètes (ANNE:POLY larvae s1) - pélagiques\n")
+        f.write("- **Impact** : Sous-estimation minime de la biomasse pélagique réelle, mais ")
+        f.write("meilleure représentation du zooplancton strictement pélagique\n\n")
+
+        f.write("### 4. Exclusion des traits aberrants (<50m)\n\n")
+        f.write(f"- **Exclus** : {len(excluded_shallow)} traits avec profondeur <50m\n")
+        f.write("- **Justification** : Écart majeur avec protocoles standards (150m, 250m), ")
+        f.write("potentiels problèmes techniques ou côtiers\n")
+        f.write("- **Impact** : Perte d'information sur la couche superficielle, mais amélioration ")
+        f.write("de la cohérence du jeu de données\n\n")
+
+        f.write("### 5. Hétérogénéité des engins\n\n")
+        f.write("- **Type dominant** : Bongo (79.3%), maille 236µm\n")
+        f.write("- **Autres types** : Ring, SCOR (20.7%)\n")
+        f.write("- **Mailles** : Majorité 236µm (cohérent HOT/BATS 202µm), minorité 253-335µm\n")
+        f.write("- **Impact** : Efficacité de capture potentiellement différente selon le type de filet. ")
+        f.write("Mailles plus grandes (>250µm) sous-échantillonnent les petits copépodes.\n")
+        f.write("- **Non corrigé** : Pas de facteur de correction appliqué\n\n")
+
+        f.write("### 6. Classification jour/nuit\n\n")
+        f.write("- **Méthode** : Colonne 'Twilight' dans les données brutes (Daylight vs Night)\n")
+        f.write("- **Critère** : Probablement basé sur heure locale et/ou observations visuelles\n")
+        day_pct = (df['day_night'] == 'day').sum() / len(df) * 100
+        night_pct = (df['day_night'] == 'night').sum() / len(df) * 100
+        f.write(f"- **Distribution observée** : {day_pct:.1f}% jour vs {night_pct:.1f}% nuit\n")
+        f.write("- **Biais** : Déséquilibre jour/nuit, campagnes potentiellement concentrées ")
+        f.write("sur une période diurne\n\n")
+
+        f.write("### 7. Résolution taxonomique élevée\n\n")
+        f.write("- **Avantage** : 91 taxa planctoniques identifiés (vs biomasse totale pour HOT/BATS)\n")
+        f.write("- **Limitation** : Somme des taxa ne capture pas les interactions trophiques ")
+        f.write("ou la structure de taille\n")
+        f.write("- **Cohérence** : Conversion en biomasse sèche totale pour comparabilité inter-stations\n\n")
+
+        f.write("### 8. Couverture temporelle et spatiale\n\n")
+        f.write(f"- **Période** : {df['time'].min().year}-{df['time'].max().year} ")
+        f.write(f"({df['time'].max().year - df['time'].min().year + 1} ans)\n")
+        f.write("- **Échantillonnage** : Irrégulier dans le temps et l'espace\n")
+        f.write(f"- **Cellules spatiales** : {final[['lat_bin', 'lon_bin']].drop_duplicates().shape[0]} ")
+        f.write("cellules 0.5° occupées\n")
+        f.write("- **Biais potentiel** : Concentration des observations près de stations récurrentes ")
+        f.write("(P26, P12), représentativité régionale à vérifier\n\n")
 
     print(f"   ✓ {REPORT_FILE}")
     print()

@@ -423,6 +423,75 @@ def main():
         f.write("2. Median of tows per day/depth_category/day_night\n\n")
 
         f.write("---\n\n")
+        f.write("## Points d'attention et biais potentiels\n\n")
+
+        f.write("### 1. Station fixe unique\n\n")
+        f.write("- **Type** : Station ALOHA (~22.75°N, -158°W)\n")
+        f.write("- **Avantage** : Séries temporelles sans confondant spatial, répétabilité élevée\n")
+        f.write("- **Limitation** : Représentativité régionale limitée, pas de gradient spatial\n")
+        f.write("- **Impact** : Excellente pour tendances temporelles, non généralisable ")
+        f.write("à l'ensemble du gyre subtropical Nord-Pacifique\n\n")
+
+        f.write("### 2. Fractionnement par taille\n\n")
+        f.write("- **Méthode** : 5 fractions (0: 0.2-0.5mm, 1: 0.5-1mm, 2: 1-2mm, 3: 2-5mm, 4: >5mm)\n")
+        f.write("- **Somme** : Fractions 0-4 (0.2-5mm et >5mm)\n")
+        f.write("- **Avantage** : Information sur structure de taille du zooplancton\n")
+        f.write("- **Limitation** : Somme totale mélange différentes efficacités de capture par fraction\n\n")
+
+        f.write("### 3. Exclusion de la fraction 5 (>5mm)\n\n")
+        frac5_count = len(df[df['frac'] == 5]) if 'frac' in df.columns else 0
+        f.write(f"- **Fraction exclue** : Fraction 5 (>5mm) - {frac5_count} observations\n")
+        f.write("- **Justification** : Capture du micronecton (organismes >20mm) mal échantillonné ")
+        f.write("par filet 1m²/202µm, efficacité de capture très faible pour grands organismes mobiles\n")
+        f.write("- **Organismes concernés** : Grands euphausiacés, méduses, larves de poissons, céphalopodes\n")
+        f.write("- **Impact** : Sous-estimation de la biomasse totale, mais meilleure cohérence ")
+        f.write("avec définition standard du zooplancton (<5mm)\n\n")
+
+        f.write("### 4. Exclusion des traits aberrants (<50m)\n\n")
+        f.write(f"- **Exclus** : {len(excluded_shallow)} traits avec profondeur <50m\n")
+        f.write("- **Justification** : Écart majeur avec protocole standard (~175m), ")
+        f.write("potentiels problèmes techniques ou conditions météo défavorables\n")
+        f.write("- **Impact** : Perte d'information sur périodes à conditions difficiles\n\n")
+
+        f.write("### 5. Variabilité des profondeurs de trait\n\n")
+        depth_stats = final['tow_depth_max'].describe()
+        f.write(f"- **Profondeur médiane** : {depth_stats['50%']:.0f}m\n")
+        f.write(f"- **Variabilité** : {depth_stats['min']:.0f}-{depth_stats['max']:.0f}m ")
+        f.write(f"(écart-type {depth_stats['std']:.0f}m)\n")
+        f.write("- **Protocoles** : Deux standards observés (~150m et ~200m)\n")
+        f.write("- **Impact** : Traits peu profonds échantillonnent uniquement l'épipélagique, ")
+        f.write("traits profonds incluent une partie du mésopélagique\n")
+        f.write("- **Mitigation** : Catégorisation ≤150m vs >150m\n\n")
+
+        f.write("### 6. Conversion densité surfacique → concentration volumique\n\n")
+        f.write("- **Formule** : concentration (mg/m³) = densité (mg/m²) / profondeur (m)\n")
+        f.write("- **Hypothèse** : Distribution uniforme du zooplancton sur la colonne d'eau échantillonnée\n")
+        f.write("- **Réalité** : Distribution verticale hétérogène (thermocline, DCM, migrations)\n")
+        f.write("- **Impact** : Conversion valide pour comparaisons entre traits de même profondeur, ")
+        f.write("biais potentiel lors de comparaisons entre profondeurs différentes\n\n")
+
+        f.write("### 7. Disponibilité carbone et azote\n\n")
+        f.write("- **Avantage unique** : Mesures directes de carbone (C) et azote (N) disponibles\n")
+        f.write("- **Variables** : biomass_dry, biomass_carbon, biomass_nitrogen\n")
+        f.write("- **Utilité** : Permet d'estimer les ratios C:N, conversion vers d'autres unités\n")
+        f.write("- **Limitation** : Non disponible pour BATS/PAPA/CalCOFI, comparaisons limitées ")
+        f.write("à la biomasse sèche\n\n")
+
+        f.write("### 8. Classification jour/nuit\n\n")
+        f.write("- **Méthode** : Heure locale simple (06h-18h = jour, 18h-06h = nuit)\n")
+        f.write("- **Simplicité** : Facile à reproduire, pas de dépendance externe\n")
+        f.write("- **Limitation** : Ne tient pas compte de la variation saisonnière du lever/coucher du soleil\n")
+        day_pct = (df['day_night'] == 'day').sum() / len(df) * 100
+        night_pct = (df['day_night'] == 'night').sum() / len(df) * 100
+        f.write(f"- **Distribution observée** : {day_pct:.1f}% jour vs {night_pct:.1f}% nuit\n\n")
+
+        f.write("### 9. Couverture temporelle\n\n")
+        f.write(f"- **Période** : {df['time'].min().year}-{df['time'].max().year} ")
+        f.write(f"({df['time'].max().year - df['time'].min().year + 1} ans)\n")
+        f.write("- **Fréquence** : Mensuelle environ (varie selon périodes)\n")
+        f.write("- **Gaps** : À vérifier (événements El Niño, problèmes logistiques)\n\n")
+
+        f.write("---\n\n")
         f.write("*Generated with seapopym-data pipeline*\n")
 
     print(f"   ✓ Report saved to {REPORT_FILE}")
