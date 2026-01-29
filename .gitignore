@@ -57,3 +57,4 @@ test/
 # Add specific raw data folders if you don't want to track CSVs
 # src/**/1_raw/*
 # src/**/2_processed/*
+release/
