@@ -1,12 +1,12 @@
 # BATS Station Report
 
-**Date**: 2026-01-29 19:31:56
+**Date**: 2026-02-16 17:35:19
 **Location**: 31.6°N, -64.2°W
 
 ## Summary
 
 - Initial rows: 6,728
-- Final rows: 663
+- Final rows: 814
 - Period: 1995-05-10 to 2022-12-13
 
 ### Exclusions
@@ -69,7 +69,7 @@
 
 - **Exclus** : 22 lignes sans information de tamis
 - **Justification** : Impossible de catégoriser par taille sans cette information
-- **Impact** : Perte minime ({len(excluded_no_sieve)/initial_rows*100:.1f}% des données)
+- **Impact** : Perte minime (0.3% des données)
 
 ### 6. Variabilité des profondeurs de trait
 
@@ -95,10 +95,10 @@
 
 ### 9. Classification jour/nuit
 
-- **Méthode** : Heure locale simple (06h-18h = jour, 18h-06h = nuit)
-- **Simplicité** : Reproductible, cohérent avec HOT
+- **Méthode** : Heure locale (time_in, format HHMM) : 06h-18h = jour, 18h-06h = nuit
+- **Source** : Colonne `time_in` des données brutes (heure locale de début de trait)
 - **Limitation** : Pas de correction saisonnière du lever/coucher du soleil
-- **Distribution observée** : 0.0% jour vs 100.0% nuit
+- **Distribution observée** : 49.6% jour vs 50.4% nuit
 
 ### 10. Protocole d'échantillonnage
 

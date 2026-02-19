@@ -21,8 +21,7 @@ from core.plotting import Plotter
 def main():
     # ========== PATHS ==========
     STATION_DIR = PROJECT_ROOT / "src" / "bats"
-    OLD_DIR = PROJECT_ROOT / "OLD_src" / "bats"
-    RAW_DIR = OLD_DIR / "1_raw"
+    RAW_DIR = STATION_DIR / "data" / "raw"
     RELEASE_DIR = STATION_DIR / "release"
     REPORTS_DIR = STATION_DIR / "reports"
     FIGURES_DIR = REPORTS_DIR / "figures"
@@ -79,8 +78,13 @@ def main():
     print("⏰ Processing temporal data...")
     df["time"] = pd.to_datetime(df["time"])
     df["date"] = df["time"].dt.floor("D")
-    df["hour"] = df["time"].dt.hour
+    # Day/Night classification using time_in (HHMM local time)
+    # The 'time' column only contains dates (T00:00:00), not actual tow times
+    df["time_in"] = pd.to_numeric(df["time_in"], errors="coerce")
+    df["hour"] = df["time_in"] // 100
     df["day_night"] = df["hour"].apply(lambda h: "day" if 6 <= h < 18 else "night")
+    print(f"   Day samples: {(df['day_night'] == 'day').sum()}")
+    print(f"   Night samples: {(df['day_night'] == 'night').sum()}")
     print()
 
     # ========== 4. DEPTH CATEGORIZATION ==========
@@ -276,7 +280,7 @@ def main():
         f.write("### 5. Exclusion des lignes sans sieve_size\n\n")
         f.write(f"- **Exclus** : {len(excluded_no_sieve)} lignes sans information de tamis\n")
         f.write("- **Justification** : Impossible de catégoriser par taille sans cette information\n")
-        f.write("- **Impact** : Perte minime ({len(excluded_no_sieve)/initial_rows*100:.1f}% des données)\n\n")
+        f.write(f"- **Impact** : Perte minime ({len(excluded_no_sieve)/initial_rows*100:.1f}% des données)\n\n")
 
         f.write("### 6. Variabilité des profondeurs de trait\n\n")
         depth_stats = df['tow_depth_max'].describe()
@@ -302,8 +306,8 @@ def main():
         f.write("- **Note** : C et N mesurés 1994-1998 uniquement (4 cruises/an), non exploité ici\n\n")
 
         f.write("### 9. Classification jour/nuit\n\n")
-        f.write("- **Méthode** : Heure locale simple (06h-18h = jour, 18h-06h = nuit)\n")
-        f.write("- **Simplicité** : Reproductible, cohérent avec HOT\n")
+        f.write("- **Méthode** : Heure locale (time_in, format HHMM) : 06h-18h = jour, 18h-06h = nuit\n")
+        f.write("- **Source** : Colonne `time_in` des données brutes (heure locale de début de trait)\n")
         f.write("- **Limitation** : Pas de correction saisonnière du lever/coucher du soleil\n")
         day_pct = (df['day_night'] == 'day').sum() / len(df) * 100
         night_pct = (df['day_night'] == 'night').sum() / len(df) * 100

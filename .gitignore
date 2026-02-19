@@ -1,3 +1,11 @@
+IA
+
+# Claude Code
+.claude/
+
+# Python version (uv/pyenv)
+.python-version
+
 # Environments
 .env
 .venv/
@@ -54,7 +62,3 @@ test/
 # Data files (NetCDF, Zarr, CSVs if large)
 *.nc
 *.zarr
-# Add specific raw data folders if you don't want to track CSVs
-# src/**/1_raw/*
-# src/**/2_processed/*
-release/

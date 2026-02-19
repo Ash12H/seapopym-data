@@ -21,8 +21,7 @@ from core.plotting import Plotter
 def main():
     # ========== PATHS ==========
     STATION_DIR = PROJECT_ROOT / "src" / "papa"
-    OLD_DIR = PROJECT_ROOT / "OLD_src" / "papa"
-    RAW_DIR = OLD_DIR / "1_raw"
+    RAW_DIR = STATION_DIR / "data" / "raw"
     RELEASE_DIR = STATION_DIR / "release"
     REPORTS_DIR = STATION_DIR / "reports"
     FIGURES_DIR = REPORTS_DIR / "figures"
