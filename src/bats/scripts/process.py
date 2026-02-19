@@ -109,8 +109,8 @@ def main():
         df.groupby(["date", "day_night", "depth_category", "tow_id"])
         .agg(
             {
-                "dry_weight_vol_water_ratio": "sum",
-                "wet_weight_vol_water_ratio": "sum",
+                "dry_weight_vol_water_ratio": lambda x: x.sum(min_count=1),
+                "wet_weight_vol_water_ratio": lambda x: x.sum(min_count=1),
                 "tow_depth_max": "first",
                 "lat": "first",
                 "lon": "first",

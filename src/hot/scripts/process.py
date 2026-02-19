@@ -137,8 +137,8 @@ def main():
         .agg(
             {
                 "dwt_m3": "sum",  # Sum fractions 0-4
-                "carb_m3": "sum",
-                "nit_m3": "sum",
+                "carb_m3": lambda x: x.sum(min_count=1),
+                "nit_m3": lambda x: x.sum(min_count=1),
                 "tow_depth_max": "first",
                 "lat": "first",
                 "lon": "first",

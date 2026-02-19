@@ -1,6 +1,6 @@
 # HOT Station Processing Report
 
-**Date**: 2026-02-19 10:51:31
+**Date**: 2026-02-19 12:17:36
 **Station**: Hawaii Ocean Time-series (HOT), Station ALOHA
 **Location**: 22.75°N, -158°W
 
@@ -38,8 +38,8 @@
 | Metric | Mean | Median | Min | Max |
 |--------|------|--------|-----|-----|
 | Dry Weight (mg/m³) | 5.99 | 5.57 | 0.00 | 29.98 |
-| Carbon (mg/m³) | 1.73 | 1.65 | 0.00 | 11.21 |
-| Nitrogen (mg/m³) | 0.42 | 0.39 | 0.00 | 2.66 |
+| Carbon (mg/m³) | 2.06 | 1.85 | 0.23 | 11.21 |
+| Nitrogen (mg/m³) | 0.49 | 0.45 | 0.05 | 2.66 |
 
 ---
 
