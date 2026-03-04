@@ -1,6 +1,6 @@
 """
 PAPA Per-Station Processing Script
-Produces one time-series NetCDF per fixed station (like HOT/BATS format).
+Produces one Parquet file per fixed station (1 row = 1 tow).
 Target stations: P08, P12, P16, P20, P26, LBP7, CS01 (>30 observations each).
 """
 
@@ -8,11 +8,12 @@ import sys
 from pathlib import Path
 import pandas as pd
 import numpy as np
-import xarray as xr
 from datetime import datetime
 
 PROJECT_ROOT = Path(__file__).parent.parent.parent.parent
 sys.path.append(str(PROJECT_ROOT / "src"))
+
+from core.pelagic import add_pelagic_depths
 
 # Stations with >30 observations
 TARGET_STATIONS = ["P08", "P12", "P16", "P20", "P26", "LBP7", "CS01"]
@@ -87,7 +88,7 @@ def load_and_prepare(input_file: Path) -> pd.DataFrame:
 def process_station(
     df: pd.DataFrame, station_name: str, release_dir: Path
 ) -> dict | None:
-    """Process a single station into a time-series NetCDF. Returns station info dict."""
+    """Process a single station into a Parquet file. Returns station info dict."""
 
     sdf = df[df["Station"] == station_name].copy()
     n_rows = len(sdf)
@@ -110,75 +111,20 @@ def process_station(
         .reset_index()
     )
 
-    # Aggregation L2: median per day/category
-    final = (
-        agg1.groupby(["date", "day_night", "depth_category"])
-        .agg({"biomass_dry": "median", "tow_depth_max": "median"})
-        .reset_index()
-    )
+    # Rename and prepare final DataFrame
+    final = agg1.rename(columns={"date": "time"})
+    final = final.drop(columns=["depth_category", "tow_id"])
 
-    # Convert to xarray
-    ds = xr.Dataset.from_dataframe(
-        final.set_index(["date", "depth_category", "day_night"])
-    )
-    ds = ds.rename({"date": "time"})
+    # Add lat/lon as scalar columns
+    final["lat"] = station_lat
+    final["lon"] = station_lon
 
-    # Add lat/lon as size-1 dimensions
-    ds = ds.expand_dims(lat=[station_lat], lon=[station_lon])
+    # Add pelagic layer depths
+    final = add_pelagic_depths(final, lat=station_lat, lon=station_lon)
 
-    # Metadata
-    ds.attrs["title"] = f"PAPA {station_name} Zooplankton Observations"
-    ds.attrs["station"] = station_name
-    ds.attrs["station_lat"] = station_lat
-    ds.attrs["station_lon"] = station_lon
-    ds.attrs["source"] = "DFO Canada Zooplankton Database"
-    ds.attrs["institution"] = "DFO (Department of Fisheries and Oceans Canada)"
-    ds.attrs["net_type"] = "Bongo (majority), mesh 236 µm"
-    ds.attrs["processing_date"] = datetime.now().isoformat()
-    ds.attrs["excluded_data"] = (
-        "depth <50m, adult polychaetes (ANNE:POLY s1, s2, s3 - benthic)"
-    )
-    ds.attrs["conventions"] = "CF-1.8"
-    ds.attrs["data_period"] = (
-        f"{sdf['time'].min().date()} to {sdf['time'].max().date()}"
-    )
-
-    ds["biomass_dry"].attrs = {
-        "units": "mg m-3",
-        "long_name": "Dry weight biomass concentration",
-        "comment": "Sum of 91 planktonic taxa (excludes adult polychaetes)",
-    }
-    ds["tow_depth_max"].attrs = {
-        "units": "m",
-        "long_name": "Maximum tow depth",
-    }
-    ds["lat"].attrs = {
-        "units": "degrees_north",
-        "long_name": "Latitude",
-        "standard_name": "latitude",
-        "axis": "Y",
-    }
-    ds["lon"].attrs = {
-        "units": "degrees_east",
-        "long_name": "Longitude",
-        "standard_name": "longitude",
-        "axis": "X",
-    }
-    ds["time"].attrs = {
-        "long_name": "Time",
-        "standard_name": "time",
-        "axis": "T",
-    }
-    ds["depth_category"].attrs = {
-        "long_name": "Depth category",
-        "description": "Categorization based on maximum tow depth",
-        "epipelagic_only": "Tows 0-150m",
-        "epipelagic_mesopelagic": "Tows >150m",
-    }
-
-    # Save
-    out_file = release_dir / f"papa_{station_name}_obs.nc"
-    ds.to_netcdf(out_file, mode="w")
+    # Save Parquet
+    out_file = release_dir / f"papa_{station_name}_obs.parquet"
+    final.to_parquet(out_file, index=False)
 
     n_obs = len(final)
     print(
@@ -208,54 +154,37 @@ def generate_figure(station_results: list[dict], figures_dir: Path):
     if n == 1:
         axes = [axes]
 
-    # Only epipelagic_only+day is distinct (G0 only, DVM migrants are deep).
-    # The other 3 combinations (epi night, epi+meso day, epi+meso night) all
-    # capture G0+G1, so we group them as a single category.
-    cat_style = {
-        "Epipelagic day (G0)": {"color": "#2196F3", "marker": "o"},
-        "G0+G1": {"color": "#FF5722", "marker": "s"},
-    }
-
     for ax, info in zip(axes, station_results):
         final = info["final"]
-        is_epi_day = (final["depth_category"] == "epipelagic_only") & (
-            final["day_night"] == "day"
-        )
-        groups = [
-            ("Epipelagic day (G0)", final[is_epi_day]),
-            ("G0+G1", final[~is_epi_day]),
-        ]
-        for label, subset in groups:
+        for dn, style in [("day", {"color": "#2196F3", "marker": "o"}),
+                          ("night", {"color": "#FF5722", "marker": "s"})]:
+            subset = final[final["day_night"] == dn]
             if subset.empty:
                 continue
-            style = cat_style[label]
             ax.plot(
-                subset["date"],
+                subset["time"],
                 subset["biomass_dry"],
                 marker=style["marker"],
-                linestyle="-",
+                linestyle="",
                 color=style["color"],
-                alpha=0.7,
+                alpha=0.5,
                 markersize=3,
-                linewidth=0.8,
-                label=label,
+                label=dn,
             )
         ax.set_ylabel("mg/m\u00b3")
         ax.set_title(
             f"{info['station']} ({info['lat']:.2f}\u00b0N, {info['lon']:.2f}\u00b0E)"
-            f" \u2014 {info['n_obs']} obs",
+            f" \u2014 {info['n_obs']} tows",
             fontsize=11,
             fontweight="bold",
             loc="left",
         )
         ax.grid(True, alpha=0.3)
 
-    # Legend only in first subplot
     axes[0].legend(fontsize=8, loc="upper right")
-
     axes[-1].set_xlabel("Date")
     fig.suptitle(
-        "PAPA Per-Station Zooplankton Biomass Time Series",
+        "PAPA Per-Station Zooplankton Biomass (1 tow = 1 point)",
         fontsize=14,
         fontweight="bold",
         y=1.0,
@@ -282,14 +211,14 @@ def generate_report(
             f"- Stations processed: {', '.join(r['station'] for r in station_results)}\n"
         )
         total_obs = sum(r["n_obs"] for r in station_results)
-        f.write(f"- Total final observations: {total_obs:,}\n\n")
+        f.write(f"- Total final tows: {total_obs:,}\n\n")
 
         f.write("## Stations\n\n")
-        f.write("| Station | Rows | Tows | Observations | Lat | Lon | Period |\n")
-        f.write("|---------|------|------|-------------|-----|-----|--------|\n")
+        f.write("| Station | Rows | Tows | Lat | Lon | Period |\n")
+        f.write("|---------|------|------|-----|-----|--------|\n")
         for r in station_results:
             f.write(
-                f"| {r['station']} | {r['n_rows']} | {r['n_tows']} | {r['n_obs']} "
+                f"| {r['station']} | {r['n_rows']} | {r['n_obs']} "
                 f"| {r['lat']:.2f} | {r['lon']:.2f} "
                 f"| {r['period_start']} to {r['period_end']} |\n"
             )
@@ -313,15 +242,13 @@ def generate_report(
         f.write("**Source**: DFO Canada Zooplankton Database\n\n")
         f.write("**Net**: Bongo (majority) with 236 \u00b5m mesh\n\n")
         f.write("**Taxonomic Groups**: 91 planktonic taxa (94 total - 3 benthic polychaetes)\n\n")
-        f.write("**Aggregation**:\n")
-        f.write("1. Sum of 91 taxa per sample row\n")
-        f.write("2. Mean per tow (same date + depth)\n")
-        f.write("3. Median of tows per day/depth_category\n\n")
+        f.write("**Aggregation**: Mean of taxa per tow (no L2 median)\n\n")
+        f.write("**Output format**: 1 row = 1 tow (Parquet)\n\n")
         f.write("**Coordinates**: Median lat/lon per station (fixed point)\n\n")
 
         f.write("## Output Files\n\n")
         for r in station_results:
-            f.write(f"- `papa_{r['station']}_obs.nc`\n")
+            f.write(f"- `papa_{r['station']}_obs.parquet`\n")
         f.write("\n")
 
     print(f"  Report saved: {report_file.name}")

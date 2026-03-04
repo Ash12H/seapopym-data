@@ -1,20 +1,20 @@
 """
 HOT Station Processing Script
 Processes zooplankton data from Hawaii Ocean Time-series (HOT)
-Following the validated workflow from ANALYSIS_HOT.md
+Output: 1 row = 1 tow (flat Parquet)
 """
 
 import sys
 from pathlib import Path
 import pandas as pd
 import numpy as np
-import xarray as xr
 from datetime import datetime
 
 # Add src to python path to allow importing core
 PROJECT_ROOT = Path(__file__).parent.parent.parent.parent
 sys.path.append(str(PROJECT_ROOT / "src"))
 
+from core.pelagic import add_pelagic_depths
 from core.plotting import Plotter
 
 
@@ -32,29 +32,29 @@ def main():
 
     # Files
     INPUT_FILE = RAW_DIR / "hot_zooplankton.csv"
-    OUTPUT_NC = RELEASE_DIR / "hot_zooplankton_obs.nc"
+    OUTPUT_PARQUET = RELEASE_DIR / "hot_zooplankton_obs.parquet"
     REPORT_FILE = REPORTS_DIR / "report.md"
 
     print("=" * 60)
     print("Processing HOT Station (Hawaii Ocean Time-series)")
     print("=" * 60)
     print(f"Input:  {INPUT_FILE}")
-    print(f"Output: {OUTPUT_NC}")
+    print(f"Output: {OUTPUT_PARQUET}")
     print()
 
     if not INPUT_FILE.exists():
-        print(f"❌ Error: Input file {INPUT_FILE} not found.")
+        print(f"Error: Input file {INPUT_FILE} not found.")
         return
 
     # ========== 1. LOAD DATA ==========
-    print("📂 Loading data...")
+    print("Loading data...")
     df = pd.read_csv(INPUT_FILE, index_col=0)
     print(f"   Loaded {len(df)} rows")
     print(f"   Columns: {df.columns.tolist()}")
     print()
 
     # ========== 2. FILTER DATA ==========
-    print("🔍 Filtering data...")
+    print("Filtering data...")
     initial_rows = len(df)
     initial_tows = df["tow"].nunique()
 
@@ -80,7 +80,7 @@ def main():
     print()
 
     # ========== 3. TEMPORAL PROCESSING ==========
-    print("⏰ Processing temporal data...")
+    print("Processing temporal data...")
     df["time"] = pd.to_datetime(df["time"])
     df["date"] = df["time"].dt.floor("D")
     df["hour"] = df["time"].dt.hour
@@ -94,7 +94,7 @@ def main():
     print()
 
     # ========== 4. UNIT CONVERSION (m² → m³) ==========
-    print("🔄 Converting units (m² → m³)...")
+    print("Converting units (m² → m³)...")
 
     # Variables to convert (from area density to concentration)
     # dwt: g/m² → g/m³
@@ -109,7 +109,7 @@ def main():
     print()
 
     # ========== 5. DEPTH CATEGORIZATION ==========
-    print("📊 Categorizing by depth...")
+    print("Categorizing by depth...")
 
     df["depth_category"] = np.where(
         df["depth"] <= 150, "epipelagic_only", "epipelagic_mesopelagic"
@@ -125,12 +125,12 @@ def main():
     print()
 
     # ========== 6. STORE TOW METADATA ==========
-    print("💾 Storing tow metadata...")
+    print("Storing tow metadata...")
     df["tow_depth_max"] = df.groupby("tow")["depth"].transform("first")
     print()
 
     # ========== 7. AGGREGATION LEVEL 1: Sum fractions per tow ==========
-    print("🔢 Aggregating fractions per tow...")
+    print("Aggregating fractions per tow...")
 
     agg1 = (
         df.groupby(["date", "day_night", "depth_category", "tow"])
@@ -150,174 +150,60 @@ def main():
     print(f"   Aggregated {len(df)} rows → {len(agg1)} tows")
     print()
 
-    # ========== 8. AGGREGATION LEVEL 2: Median of tows per day/category ==========
-    print("📈 Aggregating tows per day/category (median)...")
+    # ========== 8. RENAME, CONVERT, ENRICH → PARQUET ==========
+    print("Preparing final DataFrame...")
 
-    final = (
-        agg1.groupby(["date", "day_night", "depth_category"])
-        .agg(
-            {
-                "dwt_m3": "median",
-                "carb_m3": "median",
-                "nit_m3": "median",
-                "tow_depth_max": "median",
-                "lat": "first",
-                "lon": "first",
-            }
-        )
-        .reset_index()
-    )
-
-    print(f"   Aggregated {len(agg1)} tows → {len(final)} daily observations")
-    print()
-
-    # ========== 9. CONVERT TO XARRAY ==========
-    print("🗂️  Converting to xarray Dataset...")
-
-    ds = xr.Dataset.from_dataframe(
-        final.set_index(["date", "depth_category", "day_night"])
-    )
-
-    # Rename and convert units
-    ds = ds.rename(
-        {
-            "date": "time",
-            "dwt_m3": "biomass_dry",
-            "carb_m3": "biomass_carbon",
-            "nit_m3": "biomass_nitrogen",
-        }
-    )
+    # Rename columns
+    final = agg1.rename(columns={
+        "date": "time",
+        "dwt_m3": "biomass_dry",
+        "carb_m3": "biomass_carbon",
+        "nit_m3": "biomass_nitrogen",
+    })
 
     # Convert biomass_dry: g/m³ → mg/m³
-    ds["biomass_dry"] = ds["biomass_dry"] * 1000
+    final["biomass_dry"] = final["biomass_dry"] * 1000
 
+    # Drop columns no longer needed
+    final = final.drop(columns=["depth_category", "tow"])
+
+    # Add pelagic layer depths
+    print("Adding pelagic layer depths...")
+    station_lat, station_lon = 22.75, -158.0
+    final = add_pelagic_depths(final, lat=station_lat, lon=station_lon)
+
+    # Save Parquet
+    print(f"\nSaving Parquet ({len(final)} tows)...")
+    final.to_parquet(OUTPUT_PARQUET, index=False)
+    print(f"   Saved to {OUTPUT_PARQUET}")
+    print(f"   Columns: {final.columns.tolist()}")
     print()
 
-    # ========== 10. ADD METADATA ==========
-    print("📝 Adding metadata...")
+    # ========== 9. GENERATE FIGURES ==========
+    print("Generating figures...")
 
-    # Global attributes
-    ds.attrs["title"] = "HOT Zooplankton Observations"
-    ds.attrs["station"] = "HOT"
-    ds.attrs["station_name"] = "Hawaii Ocean Time-series, Station ALOHA"
-    ds.attrs["location"] = "22.75°N, -158°W"
-    ds.attrs["institution"] = "University of Hawaii at Manoa"
-    ds.attrs["source"] = "Hawaii Ocean Time-series Data Organization & Graphical System (HOT-DOGS)"
-    ds.attrs["sampling_method"] = "Oblique tows from surface to max depth and back"
-    ds.attrs["net_type"] = "1 m² net with 202 µm mesh (Nitex)"
-    ds.attrs["size_range"] = "0.2-5 mm (mesozooplankton, fractions 0-4)"
-    ds.attrs["history"] = f"Created on {datetime.now().isoformat()} using seapopym-data pipeline"
-    ds.attrs["processing_date"] = datetime.now().isoformat()
-    ds.attrs["data_period"] = f"{df['time'].min().date()} to {df['time'].max().date()}"
-    ds.attrs["excluded_data"] = "Tows with depth <50m (2 tows), Fraction 5 (>5mm micronekton)"
-    ds.attrs["references"] = "https://hahana.soest.hawaii.edu/hot/hot-dogs/"
-    ds.attrs["conventions"] = "CF-1.8"
-
-    # Variable attributes
-    ds["biomass_dry"].attrs = {
-        "long_name": "Zooplankton dry weight biomass concentration",
-        "units": "mg m-3",
-        "standard_name": "zooplankton_dry_weight_concentration",
-        "description": "Sum of size fractions 0-4 (0.2-5mm), mean concentration over sampled water column",
-    }
-
-    ds["biomass_carbon"].attrs = {
-        "long_name": "Zooplankton carbon biomass concentration",
-        "units": "mg m-3",
-        "standard_name": "zooplankton_carbon_concentration",
-        "description": "Sum of size fractions 0-4 (0.2-5mm), mean concentration over sampled water column",
-    }
-
-    ds["biomass_nitrogen"].attrs = {
-        "long_name": "Zooplankton nitrogen biomass concentration",
-        "units": "mg m-3",
-        "standard_name": "zooplankton_nitrogen_concentration",
-        "description": "Sum of size fractions 0-4 (0.2-5mm), mean concentration over sampled water column",
-    }
-
-    ds["tow_depth_max"].attrs = {
-        "long_name": "Maximum tow depth",
-        "units": "m",
-        "standard_name": "depth",
-        "description": "Maximum depth reached during oblique tow (median of tows in this category/day)",
-    }
-
-    # Coordinate attributes
-    ds["time"].attrs = {
-        "long_name": "Time",
-        "standard_name": "time",
-        "axis": "T",
-    }
-
-    ds["depth_category"].attrs = {
-        "long_name": "Depth category",
-        "description": "Categorization based on maximum tow depth",
-        "epipelagic_only": "Tows 0-150m, samples ONLY epipelagic zone (0-150m)",
-        "epipelagic_mesopelagic": "Tows >150m, samples BOTH epipelagic (0-150m) AND mesopelagic (150-depth_max) zones",
-    }
-
-    ds["day_night"].attrs = {
-        "long_name": "Day or night",
-        "description": "Day (06:00-18:00 local time) or night (18:00-06:00 local time)",
-        "flag_values": "day, night",
-    }
-
-    ds["lat"].attrs = {
-        "long_name": "Latitude",
-        "units": "degrees_north",
-        "standard_name": "latitude",
-        "axis": "Y",
-    }
-
-    ds["lon"].attrs = {
-        "long_name": "Longitude",
-        "units": "degrees_east",
-        "standard_name": "longitude",
-        "axis": "X",
-    }
-
-    print()
-
-    # ========== 11. SAVE NETCDF ==========
-    print("💾 Saving NetCDF...")
-    ds.to_netcdf(OUTPUT_NC, mode="w")
-    print(f"   ✓ Saved to {OUTPUT_NC}")
-    print()
-
-    # ========== 12. GENERATE FIGURES ==========
-    print("📊 Generating figures...")
-
-    # Convert back to dataframe for plotting
-    plot_df = final.copy()
-    plot_df["biomass_dry_mg_m3"] = plot_df["dwt_m3"] * 1000
-
-    # Time series by depth category and day/night
     try:
         import matplotlib.pyplot as plt
 
-        fig, axes = plt.subplots(2, 2, figsize=(14, 10))
+        fig, axes = plt.subplots(1, 2, figsize=(14, 5))
 
-        for i, depth_cat in enumerate(["epipelagic_only", "epipelagic_mesopelagic"]):
-            for j, dn in enumerate(["day", "night"]):
-                ax = axes[i, j]
-                subset = plot_df[
-                    (plot_df["depth_category"] == depth_cat)
-                    & (plot_df["day_night"] == dn)
-                ]
-                if not subset.empty:
-                    ax.plot(subset["date"], subset["biomass_dry_mg_m3"], "o-", alpha=0.6)
-                    ax.set_title(f"{depth_cat} - {dn}")
-                    ax.set_ylabel("Biomass (mg/m³)")
-                    ax.grid(True, alpha=0.3)
+        for j, dn in enumerate(["day", "night"]):
+            ax = axes[j]
+            subset = final[final["day_night"] == dn]
+            if not subset.empty:
+                ax.plot(subset["time"], subset["biomass_dry"], "o", alpha=0.4, markersize=3)
+                ax.set_title(f"{dn}")
+                ax.set_ylabel("Biomass dry (mg/m³)")
+                ax.grid(True, alpha=0.3)
 
+        plt.suptitle("HOT Zooplankton Biomass (1 tow = 1 point)")
         plt.tight_layout()
         plt.savefig(FIGURES_DIR / "time_series_biomass.png", dpi=150)
         plt.close()
-        print("   ✓ time_series_biomass.png")
+        print("   time_series_biomass.png")
     except Exception as e:
-        print(f"   ⚠ Could not generate time series plot: {e}")
+        print(f"   Could not generate time series plot: {e}")
 
-    # Map
     try:
         fig, ax = plt.subplots(figsize=(8, 6))
         ax.scatter(final["lon"].iloc[0], final["lat"].iloc[0], s=200, c="red", marker="*", edgecolors="black", linewidths=2, zorder=5)
@@ -329,14 +215,14 @@ def main():
         ax.set_ylim(final["lat"].iloc[0] - 5, final["lat"].iloc[0] + 5)
         plt.savefig(FIGURES_DIR / "map.png", dpi=150)
         plt.close()
-        print("   ✓ map.png")
+        print("   map.png")
     except Exception as e:
-        print(f"   ⚠ Could not generate map: {e}")
+        print(f"   Could not generate map: {e}")
 
     print()
 
-    # ========== 13. GENERATE REPORT ==========
-    print("📄 Generating report...")
+    # ========== 10. GENERATE REPORT ==========
+    print("Generating report...")
 
     with open(REPORT_FILE, "w") as f:
         f.write("# HOT Station Processing Report\n\n")
@@ -348,10 +234,10 @@ def main():
 
         f.write("## Data Processing Summary\n\n")
         f.write(f"- **Input file**: `{INPUT_FILE.name}`\n")
-        f.write(f"- **Output file**: `{OUTPUT_NC.name}`\n")
+        f.write(f"- **Output file**: `{OUTPUT_PARQUET.name}`\n")
         f.write(f"- **Initial rows**: {initial_rows:,}\n")
         f.write(f"- **Initial tows**: {initial_tows:,}\n")
-        f.write(f"- **Final rows**: {len(final):,}\n")
+        f.write(f"- **Final tows (rows)**: {len(final):,}\n")
         f.write(f"- **Time period**: {df['time'].min().date()} to {df['time'].max().date()}\n\n")
 
         f.write("### Exclusions Applied\n\n")
@@ -361,38 +247,26 @@ def main():
             f.write(f"   - Tow {tow}: {tow_data['time']} | depth={tow_data['depth']}m\n")
         f.write(f"\n2. **Fraction 5** (>5mm micronekton): {len(excluded_frac5):,} rows excluded\n\n")
 
-        f.write("### Depth Categories\n\n")
-        epi_tows = final[final["depth_category"] == "epipelagic_only"]
-        meso_tows = final[final["depth_category"] == "epipelagic_mesopelagic"]
-
-        f.write(f"- **epipelagic_only** (≤150m): {len(epi_tows)} observations\n")
-        f.write(f"  - Samples ONLY epipelagic zone (0-150m)\n")
-        f.write(f"  - Mean tow depth: {epi_tows['tow_depth_max'].mean():.1f}m\n\n")
-
-        f.write(f"- **epipelagic_mesopelagic** (>150m): {len(meso_tows)} observations\n")
-        f.write(f"  - Samples BOTH epipelagic (0-150m) AND mesopelagic (>150m) zones\n")
-        f.write(f"  - Mean tow depth: {meso_tows['tow_depth_max'].mean():.1f}m\n\n")
-
         f.write("### Biomass Statistics\n\n")
         f.write(f"| Metric | Mean | Median | Min | Max |\n")
         f.write(f"|--------|------|--------|-----|-----|\n")
         f.write(
-            f"| Dry Weight (mg/m³) | {plot_df['biomass_dry_mg_m3'].mean():.2f} | "
-            f"{plot_df['biomass_dry_mg_m3'].median():.2f} | "
-            f"{plot_df['biomass_dry_mg_m3'].min():.2f} | "
-            f"{plot_df['biomass_dry_mg_m3'].max():.2f} |\n"
+            f"| Dry Weight (mg/m³) | {final['biomass_dry'].mean():.2f} | "
+            f"{final['biomass_dry'].median():.2f} | "
+            f"{final['biomass_dry'].min():.2f} | "
+            f"{final['biomass_dry'].max():.2f} |\n"
         )
         f.write(
-            f"| Carbon (mg/m³) | {plot_df['carb_m3'].mean():.2f} | "
-            f"{plot_df['carb_m3'].median():.2f} | "
-            f"{plot_df['carb_m3'].min():.2f} | "
-            f"{plot_df['carb_m3'].max():.2f} |\n"
+            f"| Carbon (mg/m³) | {final['biomass_carbon'].mean():.2f} | "
+            f"{final['biomass_carbon'].median():.2f} | "
+            f"{final['biomass_carbon'].min():.2f} | "
+            f"{final['biomass_carbon'].max():.2f} |\n"
         )
         f.write(
-            f"| Nitrogen (mg/m³) | {plot_df['nit_m3'].mean():.2f} | "
-            f"{plot_df['nit_m3'].median():.2f} | "
-            f"{plot_df['nit_m3'].min():.2f} | "
-            f"{plot_df['nit_m3'].max():.2f} |\n"
+            f"| Nitrogen (mg/m³) | {final['biomass_nitrogen'].mean():.2f} | "
+            f"{final['biomass_nitrogen'].median():.2f} | "
+            f"{final['biomass_nitrogen'].min():.2f} | "
+            f"{final['biomass_nitrogen'].max():.2f} |\n"
         )
         f.write("\n")
 
@@ -417,9 +291,8 @@ def main():
         f.write("**Net**: 1 m² with 202 µm mesh (Nitex)\n\n")
         f.write("**Size Fractions**: 0 (200µm), 1 (500µm), 2 (1mm), 3 (2mm), 4 (5mm)\n\n")
         f.write("**Unit Conversion**: Area density (g/m² or mg/m²) divided by tow depth → concentration (mg/m³)\n\n")
-        f.write("**Aggregation**:\n")
-        f.write("1. Sum of size fractions 0-4 per tow\n")
-        f.write("2. Median of tows per day/depth_category/day_night\n\n")
+        f.write("**Aggregation**: Sum of size fractions 0-4 per tow (no L2 median)\n\n")
+        f.write("**Output format**: 1 row = 1 tow (Parquet)\n\n")
 
         f.write("---\n\n")
         f.write("## Points d'attention et biais potentiels\n\n")
@@ -460,7 +333,7 @@ def main():
         f.write("- **Protocoles** : Deux standards observés (~150m et ~200m)\n")
         f.write("- **Impact** : Traits peu profonds échantillonnent uniquement l'épipélagique, ")
         f.write("traits profonds incluent une partie du mésopélagique\n")
-        f.write("- **Mitigation** : Catégorisation ≤150m vs >150m\n\n")
+        f.write("- **Mitigation** : tow_depth_max conservé pour chaque tow individuel\n\n")
 
         f.write("### 6. Conversion densité surfacique → concentration volumique\n\n")
         f.write("- **Formule** : concentration (mg/m³) = densité (mg/m²) / profondeur (m)\n")
@@ -493,13 +366,13 @@ def main():
         f.write("---\n\n")
         f.write("*Generated with seapopym-data pipeline*\n")
 
-    print(f"   ✓ Report saved to {REPORT_FILE}")
+    print(f"   Report saved to {REPORT_FILE}")
     print()
 
     print("=" * 60)
-    print("✅ Processing complete!")
+    print("Processing complete!")
     print("=" * 60)
-    print(f"Output NetCDF: {OUTPUT_NC}")
+    print(f"Output Parquet: {OUTPUT_PARQUET}")
     print(f"Report: {REPORT_FILE}")
 
 

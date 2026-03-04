@@ -61,4 +61,5 @@ test/
 
 # Data files (NetCDF, Zarr, CSVs if large)
 *.nc
+*.parquet
 *.zarr

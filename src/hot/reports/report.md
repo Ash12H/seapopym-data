@@ -1,6 +1,6 @@
 # HOT Station Processing Report
 
-**Date**: 2026-03-03 13:45:48
+**Date**: 2026-03-04 13:35:51
 **Station**: Hawaii Ocean Time-series (HOT), Station ALOHA
 **Location**: 22.75°N, -158°W
 
@@ -9,10 +9,10 @@
 ## Data Processing Summary
 
 - **Input file**: `hot_zooplankton.csv`
-- **Output file**: `hot_zooplankton_obs.nc`
+- **Output file**: `hot_zooplankton_obs.parquet`
 - **Initial rows**: 9,348
 - **Initial tows**: 1,558
-- **Final rows**: 1,176
+- **Final tows (rows)**: 1,556
 - **Time period**: 1994-02-17 to 2022-09-02
 
 ### Exclusions Applied
@@ -23,23 +23,13 @@
 
 2. **Fraction 5** (>5mm micronekton): 1,556 rows excluded
 
-### Depth Categories
-
-- **epipelagic_only** (≤150m): 427 observations
-  - Samples ONLY epipelagic zone (0-150m)
-  - Mean tow depth: 126.2m
-
-- **epipelagic_mesopelagic** (>150m): 749 observations
-  - Samples BOTH epipelagic (0-150m) AND mesopelagic (>150m) zones
-  - Mean tow depth: 186.9m
-
 ### Biomass Statistics
 
 | Metric | Mean | Median | Min | Max |
 |--------|------|--------|-----|-----|
-| Dry Weight (mg/m³) | 5.99 | 5.57 | 0.00 | 29.98 |
-| Carbon (mg/m³) | 2.06 | 1.85 | 0.23 | 11.21 |
-| Nitrogen (mg/m³) | 0.49 | 0.45 | 0.05 | 2.66 |
+| Dry Weight (mg/m³) | 5.99 | 5.53 | 0.00 | 34.11 |
+| Carbon (mg/m³) | 2.07 | 1.86 | 0.23 | 12.67 |
+| Nitrogen (mg/m³) | 0.50 | 0.45 | 0.05 | 3.01 |
 
 ---
 
@@ -65,9 +55,9 @@
 
 **Unit Conversion**: Area density (g/m² or mg/m²) divided by tow depth → concentration (mg/m³)
 
-**Aggregation**:
-1. Sum of size fractions 0-4 per tow
-2. Median of tows per day/depth_category/day_night
+**Aggregation**: Sum of size fractions 0-4 per tow (no L2 median)
+
+**Output format**: 1 row = 1 tow (Parquet)
 
 ---
 
@@ -103,10 +93,10 @@
 ### 5. Variabilité des profondeurs de trait
 
 - **Profondeur médiane** : 167m
-- **Variabilité** : 55-268m (écart-type 36m)
+- **Variabilité** : 55-271m (écart-type 37m)
 - **Protocoles** : Deux standards observés (~150m et ~200m)
 - **Impact** : Traits peu profonds échantillonnent uniquement l'épipélagique, traits profonds incluent une partie du mésopélagique
-- **Mitigation** : Catégorisation ≤150m vs >150m
+- **Mitigation** : tow_depth_max conservé pour chaque tow individuel
 
 ### 6. Conversion densité surfacique → concentration volumique
 

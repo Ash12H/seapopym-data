@@ -1,12 +1,12 @@
 # BATS Station Report
 
-**Date**: 2026-03-03 18:40:26
+**Date**: 2026-03-04 13:36:21
 **Location**: 31.6°N, -64.2°W
 
 ## Summary
 
 - Initial rows: 6,728
-- Final rows: 814
+- Final tows (rows): 1,308
 - Period: 1995-05-10 to 2022-12-13
 
 ### Exclusions
@@ -31,9 +31,9 @@
 
 **Fractions analyzed**: 200µm, 500µm, 1mm, 2mm (excluding 5mm)
 
-**Aggregation**:
-1. Sum of size fractions per tow
-2. Median of tows per day/depth_category/day_night
+**Aggregation**: Sum of size fractions per tow (no L2 median)
+
+**Output format**: 1 row = 1 tow (Parquet)
 
 ## Points d'attention et biais potentiels
 
@@ -77,7 +77,7 @@
 - **Variabilité** : 50-306m (écart-type 35m)
 - **Protocole standard** : ~200m (double oblique)
 - **Impact** : Variabilité de profondeur affecte volume échantillonné et couverture verticale
-- **Mitigation** : Données pré-normalisées en mg/m³ (concentration volumique), catégorisation ≤150m vs >150m
+- **Mitigation** : tow_depth_max conservé pour chaque tow individuel
 
 ### 7. Concentrations pré-calculées
 
@@ -104,7 +104,6 @@
 
 - **Fréquence** : 2 réplicats jour (09h-15h) et 2 réplicats nuit (20h-02h) par cruise
 - **Réplicats** : Permet estimation variabilité intra-journalière
-- **Agrégation** : Médiane des réplicats par jour/catégorie
 
 ### 11. Couverture temporelle
 
