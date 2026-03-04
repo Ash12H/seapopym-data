@@ -1,6 +1,6 @@
 """
-HOT Observation Diagnostic Script
-Produces diagnostic figures for the HOT zooplankton Parquet release.
+BATS Observation Diagnostic Script
+Produces diagnostic figures for the BATS zooplankton Parquet release.
 
 1. Tow depth vs pelagic layer depths
 2. Day/night biomass boxplot
@@ -20,10 +20,10 @@ import numpy as np
 import pandas as pd
 
 PROJECT_ROOT = Path(__file__).parent.parent.parent.parent
-FIGURES_DIR = PROJECT_ROOT / "src" / "hot" / "reports" / "figures"
-PARQUET = PROJECT_ROOT / "src" / "hot" / "release" / "hot_zooplankton_obs.parquet"
+FIGURES_DIR = PROJECT_ROOT / "src" / "bats" / "reports" / "figures"
+PARQUET = PROJECT_ROOT / "src" / "bats" / "release" / "bats_zooplankton_obs.parquet"
 
-STATION = "HOT"
+STATION = "BATS"
 
 
 def load():
@@ -34,11 +34,7 @@ def load():
     return df
 
 
-# ---------------------------------------------------------------------------
-# Figure 1: Tow depth vs pelagic layer boundaries
-# ---------------------------------------------------------------------------
 def fig_tow_vs_layers(df: pd.DataFrame):
-    """Scatter of tow_depth_max over time with layer depth boundaries."""
     valid = df.dropna(subset=["zeu"]).sort_values("time")
 
     fig, ax = plt.subplots(figsize=(14, 5))
@@ -46,22 +42,15 @@ def fig_tow_vs_layers(df: pd.DataFrame):
     colors = {"day": "#F59E0B", "night": "#3B82F6"}
     for dn in ["day", "night"]:
         sub = valid[valid["day_night"] == dn]
-        ax.scatter(
-            sub["time"], sub["tow_depth_max"],
-            c=colors[dn], s=8, alpha=0.5, label=f"tow ({dn})", zorder=3,
-        )
+        ax.scatter(sub["time"], sub["tow_depth_max"],
+                   c=colors[dn], s=8, alpha=0.5, label=f"tow ({dn})", zorder=3)
 
     ax.plot(valid["time"], valid["layer_depth_surface"], "k-", lw=1.2, label="layer surface (1.5×Zeu)")
     ax.plot(valid["time"], valid["layer_depth_migrant"], "k--", lw=0.8, alpha=0.5, label="layer migrant (4.5×Zeu)")
 
-    ax.fill_between(
-        valid["time"], 0, valid["layer_depth_surface"],
-        alpha=0.08, color="green", label="surface layer",
-    )
-    ax.fill_between(
-        valid["time"], valid["layer_depth_surface"], valid["layer_depth_migrant"],
-        alpha=0.05, color="blue", label="migrant layer",
-    )
+    ax.fill_between(valid["time"], 0, valid["layer_depth_surface"], alpha=0.08, color="green", label="surface layer")
+    ax.fill_between(valid["time"], valid["layer_depth_surface"], valid["layer_depth_migrant"],
+                    alpha=0.05, color="blue", label="migrant layer")
 
     ax.invert_yaxis()
     ax.set_ylabel("Depth (m)")
@@ -76,11 +65,7 @@ def fig_tow_vs_layers(df: pd.DataFrame):
     print("  1. diag_tow_vs_layers.png")
 
 
-# ---------------------------------------------------------------------------
-# Figure 2: Day/night boxplot
-# ---------------------------------------------------------------------------
 def fig_day_night_boxplot(df: pd.DataFrame):
-    """Boxplot of biomass day vs night."""
     data_day = df.loc[df["day_night"] == "day", "biomass_dry"]
     data_night = df.loc[df["day_night"] == "night", "biomass_dry"]
 
@@ -89,9 +74,7 @@ def fig_day_night_boxplot(df: pd.DataFrame):
     bp = ax.boxplot(
         [data_day.dropna(), data_night.dropna()],
         tick_labels=["day (→ G0)", "night (→ G0+G1)"],
-        patch_artist=True,
-        widths=0.5,
-        showfliers=True,
+        patch_artist=True, widths=0.5, showfliers=True,
         flierprops=dict(marker=".", markersize=3, alpha=0.3),
     )
     bp["boxes"][0].set_facecolor("#F59E0B")
@@ -118,11 +101,7 @@ def fig_day_night_boxplot(df: pd.DataFrame):
     print("  2. diag_day_night.png")
 
 
-# ---------------------------------------------------------------------------
-# Figure 3: Monthly climatology
-# ---------------------------------------------------------------------------
 def fig_climatology(df: pd.DataFrame):
-    """Monthly climatology day (G0) vs night (G0+G1) with std envelope."""
     months = np.arange(1, 13)
     month_labels = ["J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D"]
 
@@ -159,11 +138,7 @@ def fig_climatology(df: pd.DataFrame):
     print("  3. diag_climatology.png")
 
 
-# ---------------------------------------------------------------------------
-# Figure 3b: Sampling density heatmap
-# ---------------------------------------------------------------------------
 def fig_sampling_density(df: pd.DataFrame):
-    """Year × month sampling density heatmap."""
     months = np.arange(1, 13)
     month_labels = ["J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D"]
 
@@ -191,11 +166,7 @@ def fig_sampling_density(df: pd.DataFrame):
     print("  3b. diag_sampling_density.png")
 
 
-# ---------------------------------------------------------------------------
-# Figure 4: DVM summary
-# ---------------------------------------------------------------------------
 def fig_dvm_summary(df: pd.DataFrame):
-    """Bar chart + DVM schematic + data summary."""
     med_day = df.loc[df["day_night"] == "day", "biomass_dry"].median()
     med_night = df.loc[df["day_night"] == "night", "biomass_dry"].median()
     n_day = (df["day_night"] == "day").sum()
@@ -205,26 +176,25 @@ def fig_dvm_summary(df: pd.DataFrame):
 
     fig, axes = plt.subplots(1, 2, figsize=(12, 5))
 
-    # (0) Bar chart
+    # Bar chart
     ax = axes[0]
     ax.bar([0, 1], [med_day, med_night],
            color=["#F59E0B", "#3B82F6"], alpha=0.7,
            edgecolor="black", linewidth=0.5)
-    ax.text(0, med_day + 0.15, f"{med_day:.2f}", ha="center", fontsize=11, fontweight="bold")
-    ax.text(1, med_night + 0.15, f"{med_night:.2f}", ha="center", fontsize=11, fontweight="bold")
+    ax.text(0, med_day + 0.1, f"{med_day:.2f}", ha="center", fontsize=11, fontweight="bold")
+    ax.text(1, med_night + 0.1, f"{med_night:.2f}", ha="center", fontsize=11, fontweight="bold")
     ax.set_xticks([0, 1])
     ax.set_xticklabels([f"Day → G0\n(n={n_day})", f"Night → G0+G1\n(n={n_night})"], fontsize=10)
     ax.set_ylabel("Biomass dry (mg/m³)")
     ax.set_title("Median biomass by observation type")
     ax.grid(True, alpha=0.2, axis="y")
 
-    # (1) DVM schematic
+    # DVM schematic
     ax = axes[1]
     ax.set_xlim(0, 10)
     ax.set_ylim(0, 300)
     ax.invert_yaxis()
 
-    # Day
     ax.fill_between([0.5, 4.5], 0, median_lds, color="#22C55E", alpha=0.3)
     ax.text(2.5, median_lds * 0.45, f"G0\n{med_day:.1f}",
             ha="center", va="center", fontsize=12, fontweight="bold", color="#22C55E")
@@ -233,7 +203,6 @@ def fig_dvm_summary(df: pd.DataFrame):
             ha="center", va="center", fontsize=12, fontweight="bold", color="#8B5CF6")
     ax.text(2.5, 290, "DAY", ha="center", fontsize=11, fontweight="bold", color="#F59E0B")
 
-    # Night
     ax.fill_between([5.5, 9.5], 0, median_lds, color="#22C55E", alpha=0.3)
     ax.fill_between([5.5, 9.5], 0, median_lds, color="#8B5CF6", alpha=0.15)
     ax.text(7.5, median_lds * 0.45, f"G0+G1\n{med_night:.1f}",
@@ -270,9 +239,6 @@ def fig_dvm_summary(df: pd.DataFrame):
     print(f"     Ratio N/D     : {med_night/med_day:.2f}")
 
 
-# ---------------------------------------------------------------------------
-# Main
-# ---------------------------------------------------------------------------
 def main():
     FIGURES_DIR.mkdir(parents=True, exist_ok=True)
 
